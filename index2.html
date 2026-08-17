@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>cnation Hub</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- React & ReactDOM CDN -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <!-- Babel (JSX 문법 사용 위해) -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <style>
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            background-color: #f9fafb; 
+            color: #1f2937; 
+            margin: 0; 
+        }
+        /* 모바일 앱 느낌의 스크롤바 숨기기 */
+        ::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        // ==========================================
+        // 1. 앱 데이터 (새 앱 추가 시 이 배열만 수정하세요)
+        // ==========================================
+        const appsData = [
+            {
+                id: "cnation-4x4drum", 
+                name: "cnation 4x4 drum",
+                description: "4x4 16개 패드 터치 리듬게임",
+                category: "🎮 게임 & 오락", 
+                icon: "🥁",
+                remark: "모바일 환경에서 가장 최적화되어 있습니다.",
+                versions: [
+                    { label: "모바일 버전", url: "https://cnation-4x4drum.vercel.app/" },
+                    { label: "PC 버전 (GitHub)", url: "https://civilizednation.github.io/cnation-4x4drum/" }
+                ]
+            },
+            {
+                id: "cnation-dominion", 
+                name: "cnation 도미니언",
+                description: "세계적으로 유명한 보드게임 도미니언을 컴퓨터와 1:1 방식으로 게임 진행",
+                category: "🎮 게임 & 오락", 
+                icon: "♟️",
+                remark: "PC 버전은 키보드와 마우스 조작에 최적화되어 있습니다.",
+                versions: [
+                    { label: "모바일 버전", url: "https://cnation-dominion.vercel.app/" },
+                    { label: "PC 버전", url: "https://civilizednation.github.io/cnation-dominion/index_pc.html" }
+                ]
+            },
+            {
+                id: "cnation-jgame", 
+                name: "cnation 영어단어 지렁이 게임",
+                description: "고전 지렁이 게임에 영어단어 맞히기를 접목한 게임",
+                category: "🎮 게임 & 오락", 
+                icon: "🐛",
+                remark: "영어/중국어 버전 및 PC 전용 버전 지원",
+                versions: [
+                    { label: "모바일 버전", url: "https://cnation-jgame.vercel.app/" },
+                    { label: "PC 전용 버전", url: "https://cnation-jgame.vercel.app/index2.html" },
+                    { label: "중국어 버전", url: "https://civilizednation.github.io/cnation-jgame-c/" }
+                ]
+            },
+            {
+                id: "cnation-msyh-sgd", 
+                name: "무석연합교회 성가대 연습",
+                description: "중국 우시 무석연합교회 성가대곡 연습을 도와주는 앱",
+                category: "🎵 음악 & 찬양", 
+                icon: "🎶", 
+                remark: "",
+                versions: [{ label: "앱 실행하기", url: "https://cnation-msyh-sgd.vercel.app/" }]
+            },
+            {
+                id: "cnation-ccm", 
+                name: "cnation CCM",
+                description: "내가 작사/작곡한 CCM 곡들을 한곳에서 보고, 들을 수 있게 관리해주는 앱",
+                category: "🎵 음악 & 찬양", 
+                icon: "🎵",
+                remark: "YouTube 채널 @grace2melody 와 연동됩니다.",
+                versions: [
+                    { label: "Firebase 버전", url: "https://cnation-ccm-list.vercel.app/" },
+                    { label: "Supabase 버전 (Best)", url: "https://civilizednation.github.io/cnation-wuxi-ccm-list/" }
+                ]
+            },
+            {
+                id: "family-birthdays", 
+                name: "우리가족 일정 알림이",
+                description: "가족 생일 등 주요 일정을 관리하고 D-Day 표시해주는 앱",
+                category: "🎂 생활 & 알림", 
+                icon: "👨‍👩‍👧‍👦", 
+                remark: "",
+                versions: [{ label: "앱 실행하기", url: "https://cnation-family-birthdays.vercel.app/" }]
+            },
+            {
+                id: "wuxi-dev-birthdays", 
+                name: "우시개발팀 생일 알림이",
+                description: "중국 우시 SK하이닉스 우시개발팀 팀원들의 생일을 관리하고 D-Day 표시",
+                category: "🎂 생활 & 알림", 
+                icon: "🏢", 
+                remark: "",
+                versions: [{ label: "앱 실행하기", url: "https://civilizednation.github.io/skhynix-wuxi-d-birthdays/" }]
+            },
+            {
+                id: "cnation-wuxi", 
+                name: "명국이의 중국생활 도우미",
+                description: "중국 우시생활 도우미 (집, 교회, 회사, 생활, 교통, 음식, 쇼핑...)",
+                category: "🛠️ 도구 & 기타", 
+                icon: "🧭",
+                remark: "우시 생활 필수 정보 총정리",
+                versions: [{ label: "앱 실행하기", url: "https://civilizednation.github.io/cnation-wuxi/" }]
+            },
+            {
+                id: "goodmento-check", 
+                name: "goodmento 출석부",
+                description: "문진숙(여동생) 인도 어린이집 출석부",
+                category: "🛠️ 도구 & 기타", 
+                icon: "📋", 
+                remark: "",
+                versions: [{ label: "앱 실행하기", url: "https://goodmento-school-check.vercel.app/" }]
+            }
+        ];
+
+        // ==========================================
+        // 2. 메인 컴포넌트 (메인 리스트 & 상세 화면)
+        // ==========================================
+        const App = () => {
+            const [selectedAppId, setSelectedAppId] = React.useState(null);
+
+            // 카테고리별로 데이터 그룹화
+            const groupedApps = appsData.reduce((acc, app) => {
+                if (!acc[app.category]) acc[app.category] = [];
+                acc[app.category].push(app);
+                return acc;
+            }, {});
+
+            // 선택된 앱 찾기
+            const currentApp = appsData.find(app => app.id === selectedAppId);
+
+            // 상세 화면 렌더링
+            if (currentApp) {
+                return (
+                    <div className="min-h-screen pb-20">
+                        <header className="bg-white shadow-sm p-4 sticky top-0 z-10 flex items-center">
+                            <button onClick={() => setSelectedAppId(null)} className="mr-3 text-gray-500 hover:text-gray-800 text-xl">‹</button>
+                            <h1 className="text-lg font-bold truncate">{currentApp.name}</h1>
+                        </header>
+                        <main className="p-4 space-y-6 max-w-2xl mx-auto">
+                            {/* 앱 설명 */}
+                            <section className="bg-white p-5 rounded-xl shadow-sm border border-gray-100">
+                                <p className="text-gray-700 leading-relaxed">{currentApp.description}</p>
+                            </section>
+
+                            {/* 실행 버튼 영역 */}
+                            <section>
+                                <h2 className="text-sm font-bold text-gray-500 mb-3 uppercase tracking-wider">앱 실행하기</h2>
+                                <div className="grid grid-cols-1 gap-3">
+                                    {currentApp.versions.map((ver, idx) => (
+                                        <a key={idx} href={ver.url} target="_blank" rel="noopener noreferrer"
+                                           className="block w-full text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl shadow-md transition active:scale-95">
+                                            {ver.label}
+                                        </a>
+                                    ))}
+                                </div>
+                            </section>
+
+                            {/* 비고(Remark) 영역 */}
+                            {currentApp.remark && (
+                                <section className="bg-gray-100 p-4 rounded-xl text-sm text-gray-600">
+                                    <span className="font-bold mr-1">📝 Remark:</span> {currentApp.remark}
+                                </section>
+                            )}
+                        </main>
+                    </div>
+                );
+            }
+
+            // 메인 리스트 화면 렌더링
+            return (
+                <div className="min-h-screen pb-20">
+                    <header className="bg-white shadow-sm p-4 sticky top-0 z-10">
+                        <h1 className="text-xl font-bold text-center text-blue-600">cnation Hub</h1>
+                    </header>
+                    <main className="p-4 space-y-8 max-w-2xl mx-auto">
+                        {Object.entries(groupedApps).map(([category, apps]) => (
+                            <section key={category}>
+                                <h2 className="text-lg font-bold mb-3 text-gray-700">{category}</h2>
+                                <div className="space-y-3">
+                                    {apps.map((app) => (
+                                        <div key={app.id} onClick={() => setSelectedAppId(app.id)}
+                                             className="flex items-center bg-white p-4 rounded-xl shadow-sm border border-gray-100 active:bg-gray-50 transition cursor-pointer">
+                                            <div className="text-3xl mr-4">{app.icon}</div>
+                                            <div className="flex-1 min-w-0">
+                                                <h3 className="font-bold text-base truncate">{app.name}</h3>
+                                                <p className="text-sm text-gray-500 truncate">{app.description}</p>
+                                            </div>
+                                            <div className="text-gray-400 ml-2">›</div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </section>
+                        ))}
+                    </main>
+                </div>
+            );
+        };
+
+        // ==========================================
+        // 3. React 렌더링
+        // ==========================================
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
