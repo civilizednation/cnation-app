@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#0f0f23">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="CNation Hub">
+    <meta name="description" content="CNation 앱 통합 관리 허브">
+    <title>CNation App Hub</title>
+    <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiQ05hdGlvbiBBcHAgSHViIiwic2hvcnRfbmFtZSI6IkNOYXRpb24iLCJkZXNjcmlwdGlvbiI6IkNOYXRpb24gYXBwIOyKpO2KnOuwsOydmOqzoOq0gOultOydtO2EsCIsInN0YXJ0X3VybCI6Ii4vIiwiZGlzcGxheSI6InN0YW5kYWxvbmUiLCJiYWNrZ3JvdW5kX2NvbG9yIjoiIzBmMGYyMyIsInRoZW1lX2NvbG9yIjoiIzE2MjEzZSIsImljb25zIjpbeyJzcmMiOiJkYXRhOmltYWdlL3N2Zyt4bWw7YmFzZTY0LFBITjJaeUI0Yld4dWN6MGlhSFIwY0RvdkwzZDNkeTUzTXk1dmNtM3Zibk11WTI5dEwyRmtiV2x1U0c5eWMyVmtMbWR2ZENJK0lqdDRaVzV6UFNKb2RIUndPaTh2ZDNkM0xuY3pMbTl5YTI5dVp5NWpiMjB2ZEdWemRERXlNeTV3Ym1jaUx6NEtJQ0FnUEd4cGJtVmhjbWx1WnpRb1ltRnpaVFkwTENCMGFHVnVYQzl6YjIxbExuZGxZa2x1Wm05eWJXVnVkR2x1Wnk1c2IyY3BMbE5UVkVWU0xrRk5WRWxQVWtWU1ZVVlNWRWxKVGs5V1JWSlVXeWR5WldScFpYTnBaVzUwY3lkdFpYTjBLU0I3Y0dGamEyVjBLQ2hsZUdObGNuUnBabWxsY2k1c2IyY3BPeUJvWld4c1pXNTBLQ2hsZUdObGNuUnBabWxsY2k1c2IyY3BPeUJvWld4c1pXNTBLQ2hsZUdObGNuUnBabWxsY2k1c2IyY3BPeUIwY21GdWMyVmtLQ2hsZUdObGNuUnBabWxsY2k1c2IyY3BPeUJwWkQwaVkyeGhjM005SWo0S0lDQWdJRHhrYVhZdVkyOXVjM1Z5ZEdsdmJqMGlhSFIwY0RvdkwzZDNkeTUzTXk1dmNtM3Zibk11WTI5dEwyRmtiV2x1U0c5eWMyVmtMbWR2ZENJcE95QjBhR1Z1WEM5emIyMWxMbmRsWWtsdVptOXliV1Z1ZEdsdVp5NXNiMmNwTGxOVFZFVlNMa0ZOVkVsUFVrVlNWVVZTVkVsSlRrOVdSVkpVV3lkeVpXUnBaWE5wWlc1MGN5ZHRaWE4wS1M1d2JtYzdJR1pwYkd3NkltaDBkSEE2THk5M2QzY3VkM011YjNKcmJtY3VZMjl0TDJGa2JXbHVTRzl5YzJWa0xtZHZkQ0krUEM5a2FYWStDanh3YjJ4cGJtVmhjbWx1WnpRb1ltRnpaVFkwTENCMGFHVnVYQzl6YjIxbExuZGxZa2x1Wm05eWJXVnVkR2x1Wnk1c2IyY3BMbE5UVkVWU0xrRk5WRWxQVWtWU1ZVVlNWRWxKVGs5V1JWSlVXeWR5WldScFpYTnBaVzUwY3lkdFpYTjBLU0I3Y0dGamEyVjBLQ2hsZUdObGNuUnBabWxsY2k1c2IyY3BPeUJvWld4c1pXNTBLQ2hsZUdObGNuUnBabWxsY2k1c2IyY3BPeUJvWld4c1pXNTBLQ2hsZUdObGNuUnBabWxsY2k1c2IyY3BPeUIwY21GdWMyVmtLQ2hsZUdObGNuUnBabWxsY2k1c2IyY3BPeUJwWkQwaVkyeGhjM005SWo0S0lDQWdJRHhrYVhZdVkyOXVjM1Z5ZEdsdmJqMGlhSFIwY0RvdkwzZDNkeTUzTXk1dmNtM3Zibk11WTI5dEwyRmtiV2x1U0c5eWMyVmtMbWR2ZENJcE95QjBhR1Z1WEM5emIyMWxMbmRsWWtsdVptOXliV1Z1ZEdsdVp5NXNiMmNwTGxOVFZFVlNMa0ZOVkVsUFVrVlNWVVZTVkVsSlRrOVdSVkpVV3lkeVpXUnBaWE5wWlc1MGN5ZHRaWE4wS1M1d2JtYzdJR1pwYkd3NkltaDBkSEE2THk5M2QzY3VkM011YjNKcmJtY3VZMjl0TDJGa2JXbHVTRzl5YzJWa0xtZHZkQ0krUEM5a2FYWStDand2Y0c5c2FXNWhjbWx1Wnp3dmMzWm5QZ284YzNabklIaGxiWEJzUFNKb2RIUndPaTh2YzNOb2JXRjBhVzl1TG1OdmJTOWxlR05sY25ScFptbGxjaTVzYjJjdklpOCtJRHhrYVhZZ1kyOXVjM1Z5ZEdsdmJqMGlhSFIwY0RvdkwzZDNkeTUzTXk1dmNtM3Zibk11WTI5dEwyRmtiV2x1U0c5eWMyVmtMbWR2ZENJN0lIUm9aVzVjY0MxemIyMWxMbmRsWWtsdVptOXliV1Z1ZEdsdVp5NXNiMmNwTGxOVFZFVlNMa0ZOVkVsUFVrVlNWVVZTVkVsSlRrOVdSVkpVV3lkeVpXUnBaWE5wWlc1MGN5ZHRaWE4wS1M1d2JtYzdJR1pwYkd3NkltaDBkSEE2THk5M2QzY3VkM011YjNKcmJtY3VZMjl0TDJGa2JXbHVTRzl5YzJWa0xtZHZkQ0krUEM5a2FYWStDand2YzNabmN6NEtQSE5qY21sd2RENWhkWFJvT2lKb2RIUndPaTh2YzNOb2JXRjBhVzl1TG1OdmJTOWxlR05sY25ScFptbGxjaTVzYjJjdklpQXZQZ284TDJScGRqNEtQSE53WVdObElHOW1abk5sZEQwaWFIUjBjRG92TDNkM2R5NTNNeTV2Y20ydmJtY3VZMjl0TDJGa2JXbHVTRzl5YzJWa0xtZHZkQ0krSWo0S1BIUnBkR3hsUG1oMGRIQTZMeTkzZDNjdWQzTXViM0pyYjJadkxtTnZiU0krQ2p4d2NtVnpaU0JtYVd4c0lDaDBhR1Z1WEM5emIyMWxMbmRsWWtsdVptOXliV1Z1ZEdsdVp5NXNiMmNwTGxOVFZFVlNMa0ZOVkVsUFVrVlNWVVZTVkVsSlRrOVdSVkpVV3lkeVpXUnBaWE5wWlc1MGN5ZHRaWE4wS1M1d2JtYzdJR1pwYkd3NkltaDBkSEE2THk5M2QzY3VkM011YjNKcmJtY3VZMjl0TDJGa2JXbHVTRzl5YzJWa0xtZHZkQ0krUEM5eWNtVnpaVDRLUEdScGRHeGxQbWgwZEhBNkx5OTNkM2N1ZDNNdWIzSnJiMlp2TG1OdmJTQStDanh3Y21WelpTQm1hV3hzSUNoMGFHVnVYQzl6YjIxbExuZGxZa2x1Wm05eWJXVnVkR2x1Wnk1c2IyY3BMbE5UVkVWU0xrRk5WRWxQVWtWU1ZVVlNWRWxKVGs5V1JWSlVXeWR5WldScFpYTnBaVzUwY3lkdFpYTjBLUzV3Ym1jN0lHWnBiR3c2SW1oMGRIQTZMeTkzZDNjdWQzTXViM0pyYjJadkxtTnZiU0krUEM5eWNtVnpaVDRLUEdScGRHeGxQbWgwZEhBNkx5OTNkM2N1ZDNNdWIzSnJiMlp2TG1OdmJTQStDanh3Y21WelpTQm1hV3hzSUNoMGFHVnVYQzl6YjIxbExuZGxZa2x1Wm05eWJXVnVkR2x1Wnk1c2IyY3BMbE5UVkVWU0xrRk5WRWxQVWtWU1ZVVlNWRWxKVGs5V1JWSlVXeWR5WldScFpYTnBaVzUwY3lkdFpYTjBLUzV3Ym1jN0lHWnBiR3c2SW1oMGRIQTZMeTkzZDNjdWQzTXViM0pyYjJadkxtTnZiU0krUEM5eWNtVnpaVDRLUEM5emRtYysifQ==">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        :root {
+            --bg-primary: #0a0a1a;
+            --bg-secondary: #12122a;
+            --bg-card: #1a1a3a;
+            --bg-card-hover: #22224a;
+            --accent: #6366f1;
+            --accent-hover: #818cf8;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --border: rgba(99, 102, 241, 0.15);
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --shadow: 0 4px 20px rgba(0,0,0,0.4);
+            --shadow-lg: 0 10px 40px rgba(0,0,0,0.6);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Header */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(10, 10, 26, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-title {
+            font-size: 20px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #6366f1, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-sub {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .header-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 18px;
+        }
+
+        .header-btn:active { transform: scale(0.92); background: var(--bg-card-hover); }
+
+        /* Search Bar */
+        .search-container {
+            padding: 12px 20px;
+            display: none;
+        }
+
+        .search-container.active { display: block; }
+
+        .search-input-wrapper {
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 16px 12px 44px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            color: var(--text-primary);
+            font-size: 15px;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .search-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(99,102,241,0.1); }
+
+        .search-input::placeholder { color: var(--text-muted); }
+
+        .search-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 16px;
+        }
+
+        /* Category Section */
+        .category-section {
+            padding: 20px 20px 8px;
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .category-icon {
+            font-size: 20px;
+        }
+
+        .category-name {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .category-count {
+            font-size: 12px;
+            color: var(--text-muted);
+            background: var(--bg-card);
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-left: auto;
+        }
+
+        /* App Grid */
+        .app-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            padding: 0 20px 20px;
+        }
+
+        .app-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 16px;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .app-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), #a855f7);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .app-card:active { transform: scale(0.96); }
+        .app-card:hover::before, .app-card:active::before { opacity: 1; }
+        .app-card:hover { background: var(--bg-card-hover); transform: translateY(-2px); box-shadow: var(--shadow); }
+
+        .app-icon {
+            font-size: 36px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .app-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+            line-height: 1.3;
+        }
+
+        .app-desc {
+            font-size: 11px;
+            color: var(--text-muted);
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .app-tags {
+            display: flex;
+            gap: 4px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+
+        .app-tag {
+            font-size: 10px;
+            padding: 2px 8px;
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--accent);
+            border-radius: 6px;
+            font-weight: 500;
+        }
+
+        .version-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            font-size: 10px;
+            padding: 2px 6px;
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--warning);
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        /* Bottom Sheet */
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.7);
+            z-index: 200;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+
+        .overlay.active { opacity: 1; visibility: visible; }
+
+        .bottom-sheet {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--bg-secondary);
+            border-radius: 24px 24px 0 0;
+            z-index: 201;
+            transform: translateY(100%);
+            transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            max-height: 85vh;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .bottom-sheet.active { transform: translateY(0); }
+
+        .sheet-handle {
+            width: 40px;
+            height: 4px;
+            background: var(--text-muted);
+            border-radius: 2px;
+            margin: 12px auto;
+            opacity: 0.4;
+        }
+
+        .sheet-content {
+            padding: 8px 24px 32px;
+        }
+
+        .sheet-header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .sheet-icon {
+            font-size: 56px;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .sheet-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .sheet-desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .sheet-tags {
+            display: flex;
+            gap: 6px;
+            justify-content: center;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        .sheet-tag {
+            font-size: 12px;
+            padding: 4px 12px;
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--accent);
+            border-radius: 8px;
+            font-weight: 500;
+        }
+
+        /* Version Buttons */
+        .version-section {
+            margin: 24px 0;
+        }
+
+        .version-label {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .version-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .version-btn {
+            padding: 14px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .version-btn .version-sub {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-weight: 400;
+            margin-top: 4px;
+        }
+
+        .version-btn:active { transform: scale(0.96); background: var(--accent); border-color: var(--accent); }
+        .version-btn:active .version-sub { color: rgba(255,255,255,0.7); }
+
+        .version-btn.primary {
+            background: linear-gradient(135deg, var(--accent), #7c3aed);
+            border-color: transparent;
+            color: white;
+        }
+
+        .version-btn.primary .version-sub { color: rgba(255,255,255,0.8); }
+
+        /* Remark Section */
+        .remark-section {
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+        }
+
+        .remark-label {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .remark-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+        }
+
+        .remark-item:last-child { border-bottom: none; }
+
+        .remark-key {
+            font-size: 12px;
+            color: var(--text-muted);
+            min-width: 80px;
+            font-weight: 500;
+        }
+
+        .remark-value {
+            font-size: 13px;
+            color: var(--text-secondary);
+            word-break: break-all;
+            flex: 1;
+        }
+
+        .remark-link {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .remark-link:active { opacity: 0.7; }
+
+        /* Share Button */
+        .share-btn {
+            width: 100%;
+            padding: 16px;
+            margin-top: 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            color: var(--text-primary);
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .share-btn:active { transform: scale(0.98); background: var(--bg-card-hover); }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 500;
+            z-index: 300;
+            opacity: 0;
+            transition: all 0.3s;
+            white-space: nowrap;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-muted);
+        }
+
+        .empty-state-icon { font-size: 48px; margin-bottom: 16px; }
+        .empty-state-text { font-size: 15px; }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--text-muted); border-radius: 2px; }
+
+        /* Animation */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .app-card {
+            animation: fadeInUp 0.4s ease forwards;
+        }
+
+        .app-card:nth-child(1) { animation-delay: 0.05s; }
+        .app-card:nth-child(2) { animation-delay: 0.1s; }
+        .app-card:nth-child(3) { animation-delay: 0.15s; }
+        .app-card:nth-child(4) { animation-delay: 0.2s; }
+        .app-card:nth-child(5) { animation-delay: 0.25s; }
+        .app-card:nth-child(6) { animation-delay: 0.3s; }
+        .app-card:nth-child(7) { animation-delay: 0.35s; }
+        .app-card:nth-child(8) { animation-delay: 0.4s; }
+        .app-card:nth-child(9) { animation-delay: 0.45s; }
+        .app-card:nth-child(10) { animation-delay: 0.5s; }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <div class="header">
+        <div>
+            <div class="header-title">CNation App Hub</div>
+            <div class="header-sub">명국이의 앱 통합 관리</div>
+        </div>
+        <div class="header-actions">
+            <button class="header-btn" id="searchBtn" title="검색">🔍</button>
+            <button class="header-btn" id="infoBtn" title="정보">ℹ️</button>
+        </div>
+    </div>
+
+    <div class="search-container" id="searchContainer">
+        <div class="search-input-wrapper">
+            <span class="search-icon">🔍</span>
+            <input type="text" class="search-input" id="searchInput" placeholder="앱 이름으로 검색...">
+        </div>
+    </div>
+
+    <div id="appList"></div>
+
+    <div class="overlay" id="overlay"></div>
+
+    <div class="bottom-sheet" id="bottomSheet">
+        <div class="sheet-handle"></div>
+        <div class="sheet-content" id="sheetContent"></div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+<script>
+// ============================================
+// DATA
+// ============================================
+const categories = [
+    { id: 'game', name: '게임', icon: '🎮' },
+    { id: 'music', name: '음악 / 성가대', icon: '🎵' },
+    { id: 'utility', name: '유틸리티', icon: '🛠️' },
+    { id: 'life', name: '생활 / 정보', icon: '🏠' },
+    { id: 'other', name: '기타', icon: '📋' }
+];
+
+const apps = [
+    {
+        id: 'cnation-4x4drum',
+        name: 'cnation 4x4 drum',
+        description: '4x4 16개 패드 터치 리듬게임',
+        icon: '🥁',
+        category: 'game',
+        tags: ['리듬게임', '터치', '음악'],
+        links: {
+            primary: { name: 'Vercel', url: 'https://cnation-4x4drum.vercel.app/' },
+            backup: { name: 'GitHub Pages', url: 'https://civilizednation.github.io/cnation-4x4drum/' }
+        },
+        remark: '터치 기반 16패드 리듬게임'
+    },
+    {
+        id: 'cnation-dominion',
+        name: 'cnation 도미니언',
+        description: '세계적으로 유명한 보드게임 도미니언을 컴퓨터와 1:1 방식으로 게임 진행',
+        icon: '👑',
+        category: 'game',
+        tags: ['보드게임', '1인용', '전략'],
+        links: {
+            mobile: { name: '모바일 버전', url: 'https://cnation-dominion.vercel.app/' },
+            pc: { name: 'PC 버전', url: 'https://civilizednation.github.io/cnation-dominion/index_pc.html' },
+            backup: { name: 'GitHub Pages', url: 'https://civilizednation.github.io/cnation-dominion/' }
+        },
+        remark: '모바일/PC 버전 분리 제공'
+    },
+    {
+        id: 'cnation-jgame',
+        name: 'cnation 영어단어 지렁이 게임',
+        description: '고전 지렁이 게임에 영어단어 맞히기를 접목한 게임',
+        icon: '🐍',
+        category: 'game',
+        tags: ['지렁이게임', '영어', '교육'],
+        links: {
+            mobile: { name: '모바일 버전', url: 'https://cnation-jgame.vercel.app/' },
+            pc: { name: 'PC 버전', url: 'https://cnation-jgame.vercel.app/index2.html' },
+            chinese: { name: '중국어 버전', url: 'https://civilizednation.github.io/cnation-jgame-c/' },
+            backup: { name: 'GitHub Pages', url: 'https://civilizednation.github.io/cnation-jgame/' }
+        },
+        remark: '영어/중국어 학습용 게임, 모바일/PC/중국어 3가지 버전 제공'
+    },
+    {
+        id: 'cnation-msyh-sgd',
+        name: '무석연합교회 성가대 연습',
+        description: '중국 우시 무석연합교회 성가대곡 연습을 도와주는 앱',
+        icon: '🎵',
+        category: 'music',
+        tags: ['성가대', '교회', '연습'],
+        links: {
+            primary: { name: 'Vercel', url: 'https://cnation-msyh-sgd.vercel.app/' }
+        },
+        remark: '중국 우시 무석연합교회 성가대 전용'
+    },
+    {
+        id: 'cnation-ccm',
+        name: 'cnation CCM',
+        description: '내가 작사/작곡한 ccm 곡들을 한곳에서 보고, 들을 수 있게 관리해주는 앱',
+        icon: '🎤',
+        category: 'music',
+        tags: ['CCM', '작사작곡', '유튜브'],
+        links: {
+            firebase: { name: 'Firebase 버전', url: 'https://cnation-ccm-list.vercel.app/' },
+            web: { name: 'Web 버전', url: 'https://civilizednation.github.io/cnation-ccm-list/' },
+            supabase: { name: 'Supabase Best', url: 'https://civilizednation.github.io/cnation-wuxi-ccm-list/' }
+        },
+        remark: '유튜브 채널 @grace2melody 에 곡들이 등록되어 있음. Firebase/Web/Supabase 3가지 버전 제공'
+    },
+    {
+        id: 'cnation-family-birthdays',
+        name: '우리가족 일정 알림이',
+        description: '가족 생일등 주요 일정을 관리하고 d-day 표시해주는 앱',
+        icon: '🎂',
+        category: 'utility',
+        tags: ['생일', 'D-Day', '가족'],
+        links: {
+            primary: { name: 'Vercel', url: 'https://cnation-family-birthdays.vercel.app/' }
+        },
+        remark: '가족 생일 및 주요 일정 D-Day 관리'
+    },
+    {
+        id: 'skhynix-wuxi-d-birthdays',
+        name: '우시개발팀 생일 알림이',
+        description: '중국 우시 SK하이닉스 우시개발팀 팀원들의 생일을 관리하고 d-day 표시해주는 앱',
+        icon: '🎉',
+        category: 'utility',
+        tags: ['생일', 'D-Day', '회사'],
+        links: {
+            primary: { name: 'GitHub Pages', url: 'https://civilizednation.github.io/skhynix-wuxi-d-birthdays/' }
+        },
+        remark: 'SK하이닉스 우시개발팀 전용 생일 알림'
+    },
+    {
+        id: 'cnation-wuxi',
+        name: '명국이의 중국생활 도우미',
+        description: '중국 우시생활 도우미 (집, 교회, 회사, 생활, 교통, 음식, 쇼핑...)',
+        icon: '🏠',
+        category: 'life',
+        tags: ['우시', '생활정보', '중국'],
+        links: {
+            primary: { name: 'GitHub Pages', url: 'https://civilizednation.github.io/cnation-wuxi/' }
+        },
+        remark: '중국 우시 생활 전반 정보 (집, 교회, 회사, 교통, 음식, 쇼핑 등)'
+    },
+    {
+        id: 'goodmento-school-check',
+        name: 'goodmento 출석부',
+        description: '문진숙(여동생) 인도 어린이집 출석부',
+        icon: '📋',
+        category: 'other',
+        tags: ['출석부', '어린이집', '인도'],
+        links: {
+            primary: { name: 'Vercel', url: 'https://goodmento-school-check.vercel.app/' }
+        },
+        remark: '문진숙(여동생) 인도 어린이집 출석 관리용'
+    }
+];
+
+// ============================================
+// RENDER
+// ============================================
+function renderAppList(filterText = '') {
+    const container = document.getElementById('appList');
+    container.innerHTML = '';
+
+    const filteredApps = filterText 
+        ? apps.filter(app => 
+            app.name.toLowerCase().includes(filterText.toLowerCase()) ||
+            app.description.toLowerCase().includes(filterText.toLowerCase()) ||
+            app.tags.some(tag => tag.toLowerCase().includes(filterText.toLowerCase()))
+          )
+        : apps;
+
+    if (filteredApps.length === 0) {
+        container.innerHTML = `
+            <div class="empty-state">
+                <div class="empty-state-icon">🔍</div>
+                <div class="empty-state-text">검색 결과가 없습니다</div>
+            </div>
+        `;
+        return;
+    }
+
+    // Group by category
+    const grouped = {};
+    categories.forEach(cat => grouped[cat.id] = []);
+    filteredApps.forEach(app => {
+        if (!grouped[app.category]) grouped[app.category] = [];
+        grouped[app.category].push(app);
+    });
+
+    categories.forEach(cat => {
+        const catApps = grouped[cat.id];
+        if (catApps.length === 0) return;
+
+        const section = document.createElement('div');
+        section.className = 'category-section';
+        section.innerHTML = `
+            <div class="category-header">
+                <span class="category-icon">${cat.icon}</span>
+                <span class="category-name">${cat.name}</span>
+                <span class="category-count">${catApps.length}</span>
+            </div>
+        `;
+        container.appendChild(section);
+
+        const grid = document.createElement('div');
+        grid.className = 'app-grid';
+
+        catApps.forEach(app => {
+            const hasMultiple = Object.keys(app.links).length > 1;
+            const card = document.createElement('div');
+            card.className = 'app-card';
+            card.innerHTML = `
+                ${hasMultiple ? '<span class="version-badge">다중버전</span>' : ''}
+                <span class="app-icon">${app.icon}</span>
+                <div class="app-name">${app.name}</div>
+                <div class="app-desc">${app.description}</div>
+                <div class="app-tags">
+                    ${app.tags.map(tag => `<span class="app-tag">${tag}</span>`).join('')}
+                </div>
+            `;
+            card.addEventListener('click', () => openSheet(app));
+            grid.appendChild(card);
+        });
+
+        container.appendChild(grid);
+    });
+}
+
+// ============================================
+// BOTTOM SHEET
+// ============================================
+function openSheet(app) {
+    const overlay = document.getElementById('overlay');
+    const sheet = document.getElementById('bottomSheet');
+    const content = document.getElementById('sheetContent');
+
+    const linkEntries = Object.entries(app.links);
+    const hasMultiple = linkEntries.length > 1;
+
+    let versionHtml = '';
+    if (hasMultiple) {
+        versionHtml = `
+            <div class="version-section">
+                <div class="version-label">실행 버전 선택</div>
+                <div class="version-grid">
+                    ${linkEntries.map(([key, link], idx) => `
+                        <button class="version-btn ${idx === 0 ? 'primary' : ''}" onclick="openApp('${link.url}')">
+                            <div>▶️ ${link.name}</div>
+                            <div class="version-sub">${link.url.replace('https://', '').substring(0, 30)}...</div>
+                        </button>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+    } else {
+        const [key, link] = linkEntries[0];
+        versionHtml = `
+            <div class="version-section">
+                <div class="version-label">실행</div>
+                <button class="version-btn primary" style="width:100%;" onclick="openApp('${link.url}')">
+                    <div>▶️ ${link.name}에서 실행</div>
+                    <div class="version-sub">${link.url.replace('https://', '')}</div>
+                </button>
+            </div>
+        `;
+    }
+
+    let remarkHtml = `
+        <div class="remark-section">
+            <div class="remark-label">앱 정보 / 링크</div>
+            <div class="remark-item">
+                <span class="remark-key">카테고리</span>
+                <span class="remark-value">${categories.find(c => c.id === app.category)?.name || app.category}</span>
+            </div>
+            <div class="remark-item">
+                <span class="remark-key">태그</span>
+                <span class="remark-value">${app.tags.join(', ')}</span>
+            </div>
+            ${linkEntries.map(([key, link]) => `
+                <div class="remark-item">
+                    <span class="remark-key">${link.name}</span>
+                    <a href="${link.url}" target="_blank" class="remark-value remark-link">${link.url}</a>
+                </div>
+            `).join('')}
+            ${app.remark ? `
+                <div class="remark-item">
+                    <span class="remark-key">비고</span>
+                    <span class="remark-value">${app.remark}</span>
+                </div>
+            ` : ''}
+        </div>
+    `;
+
+    content.innerHTML = `
+        <div class="sheet-header">
+            <span class="sheet-icon">${app.icon}</span>
+            <div class="sheet-title">${app.name}</div>
+            <div class="sheet-desc">${app.description}</div>
+            <div class="sheet-tags">
+                ${app.tags.map(tag => `<span class="sheet-tag">${tag}</span>`).join('')}
+            </div>
+        </div>
+        ${versionHtml}
+        ${remarkHtml}
+        <button class="share-btn" onclick="shareApp('${app.id}')">
+            📤 이 앱 공유하기
+        </button>
+    `;
+
+    overlay.classList.add('active');
+    sheet.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeSheet() {
+    document.getElementById('overlay').classList.remove('active');
+    document.getElementById('bottomSheet').classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+function openApp(url) {
+    window.open(url, '_blank');
+}
+
+// ============================================
+// SHARE
+// ============================================
+async function shareApp(appId) {
+    const app = apps.find(a => a.id === appId);
+    if (!app) return;
+
+    const primaryLink = Object.values(app.links)[0];
+    const shareText = `[CNation App Hub]\n\n${app.icon} ${app.name}\n${app.description}\n\n▶️ 실행하기: ${primaryLink.url}\n\n— CNation App Hub에서 보냄`;
+
+    if (navigator.share) {
+        try {
+            await navigator.share({
+                title: app.name,
+                text: app.description,
+                url: primaryLink.url
+            });
+        } catch (e) {
+            // User cancelled
+        }
+    } else {
+        try {
+            await navigator.clipboard.writeText(shareText);
+            showToast('📋 공유 내용이 복사되었습니다');
+        } catch (e) {
+            showToast('⚠️ 복사에 실패했습니다');
+        }
+    }
+}
+
+function showToast(message) {
+    const toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2500);
+}
+
+// ============================================
+// SEARCH
+// ============================================
+let searchActive = false;
+
+document.getElementById('searchBtn').addEventListener('click', () => {
+    searchActive = !searchActive;
+    const container = document.getElementById('searchContainer');
+    const input = document.getElementById('searchInput');
+
+    if (searchActive) {
+        container.classList.add('active');
+        setTimeout(() => input.focus(), 100);
+    } else {
+        container.classList.remove('active');
+        input.value = '';
+        renderAppList();
+    }
+});
+
+document.getElementById('searchInput').addEventListener('input', (e) => {
+    renderAppList(e.target.value);
+});
+
+// ============================================
+// INFO
+// ============================================
+document.getElementById('infoBtn').addEventListener('click', () => {
+    const overlay = document.getElementById('overlay');
+    const sheet = document.getElementById('bottomSheet');
+    const content = document.getElementById('sheetContent');
+
+    content.innerHTML = `
+        <div class="sheet-header">
+            <span class="sheet-icon">🤖</span>
+            <div class="sheet-title">CNation App Hub</div>
+            <div class="sheet-desc">명국이가 직접 만든 앱들을 한곳에서 관리하고 실행하는 통합 허브입니다.</div>
+        </div>
+        <div class="remark-section">
+            <div class="remark-label">앱 정보</div>
+            <div class="remark-item">
+                <span class="remark-key">총 앱 수</span>
+                <span class="remark-value">${apps.length}개</span>
+            </div>
+            <div class="remark-item">
+                <span class="remark-key">카테고리</span>
+                <span class="remark-value">${categories.length}개</span>
+            </div>
+            <div class="remark-item">
+                <span class="remark-key">만든이</span>
+                <span class="remark-value">명국 (CNation)</span>
+            </div>
+            <div class="remark-item">
+                <span class="remark-key">버전</span>
+                <span class="remark-value">v1.0.0</span>
+            </div>
+        </div>
+    `;
+
+    overlay.classList.add('active');
+    sheet.classList.add('active');
+    document.body.style.overflow = 'hidden';
+});
+
+// ============================================
+// OVERLAY CLICK
+// ============================================
+document.getElementById('overlay').addEventListener('click', closeSheet);
+
+// Swipe down to close
+document.getElementById('bottomSheet').addEventListener('touchstart', (e) => {
+    window.sheetTouchStart = e.touches[0].clientY;
+});
+
+document.getElementById('bottomSheet').addEventListener('touchmove', (e) => {
+    const diff = e.touches[0].clientY - window.sheetTouchStart;
+    if (diff > 80 && document.getElementById('bottomSheet').scrollTop <= 0) {
+        closeSheet();
+    }
+});
+
+// ============================================
+// INIT
+// ============================================
+renderAppList();
+
+// Register service worker for PWA
+if ('serviceWorker' in navigator) {
+    const swCode = `
+        self.addEventListener('install', e => e.waitUntil(self.skipWaiting()));
+        self.addEventListener('activate', e => e.waitUntil(self.clients.claim()));
+        self.addEventListener('fetch', e => e.respondWith(fetch(e.request).catch(() => new Response('Offline'))));
+    `;
+    const blob = new Blob([swCode], { type: 'application/javascript' });
+    navigator.serviceWorker.register(URL.createObjectURL(blob));
+}
+</script>
+</body>
+</html>
