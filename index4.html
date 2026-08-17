@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <title>CNation 통합 허브</title>
+    <style>
+        /* ===== 리셋 & 기본 ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        }
+        body {
+            background: #f5f7fb;
+            padding: 16px 16px 40px;
+            min-height: 100vh;
+        }
+
+        /* ===== 헤더 ===== */
+        .app-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #e9edf4;
+        }
+        .app-header h1 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #0b1b33;
+            letter-spacing: -0.5px;
+        }
+        .app-header h1 span {
+            color: #2a7de1;
+        }
+        .app-header .badge {
+            background: #e9edf4;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        /* ===== 카테고리 ===== */
+        .category-block {
+            margin-bottom: 28px;
+        }
+        .category-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1e2a44;
+            padding-left: 6px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .category-title::after {
+            content: '';
+            flex: 1;
+            height: 1.5px;
+            background: linear-gradient(to right, #d0d9e8, transparent);
+        }
+
+        /* ===== 앱 카드 (리스트) ===== */
+        .app-card {
+            background: white;
+            border-radius: 16px;
+            padding: 16px 18px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            border: 1px solid transparent;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .app-card:active {
+            transform: scale(0.97);
+            background: #f0f4fe;
+            border-color: #b3ceff;
+        }
+        .app-card .emoji {
+            font-size: 32px;
+            width: 48px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        .app-card .info {
+            flex: 1;
+        }
+        .app-card .info .name {
+            font-size: 17px;
+            font-weight: 600;
+            color: #0b1b33;
+            letter-spacing: -0.3px;
+        }
+        .app-card .info .desc {
+            font-size: 13px;
+            color: #6b7a93;
+            margin-top: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .app-card .arrow {
+            color: #b0c2db;
+            font-size: 18px;
+        }
+
+        /* ===== 상세 페이지 (오버레이) ===== */
+        .detail-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.45);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            z-index: 999;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .detail-overlay.active {
+            display: flex;
+        }
+        .detail-panel {
+            background: white;
+            border-radius: 28px;
+            max-width: 480px;
+            width: 100%;
+            max-height: 92vh;
+            overflow-y: auto;
+            padding: 28px 24px 32px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+            animation: slideUp 0.25s ease-out;
+            position: relative;
+        }
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .detail-panel .close-btn {
+            position: sticky;
+            top: 0;
+            float: right;
+            background: #f0f4fc;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-size: 20px;
+            color: #2c3e50;
+            cursor: pointer;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.1s;
+        }
+        .detail-panel .close-btn:active {
+            transform: scale(0.92);
+            background: #dce3f0;
+        }
+
+        .detail-panel .detail-emoji {
+            font-size: 44px;
+            margin-bottom: 4px;
+        }
+        .detail-panel .detail-name {
+            font-size: 24px;
+            font-weight: 700;
+            color: #0b1b33;
+            margin-bottom: 6px;
+        }
+        .detail-panel .detail-desc {
+            font-size: 15px;
+            color: #3d506e;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            background: #f6f9ff;
+            padding: 14px 16px;
+            border-radius: 14px;
+            border-left: 4px solid #2a7de1;
+        }
+
+        /* 버전 버튼 그룹 */
+        .version-group {
+            margin-bottom: 18px;
+        }
+        .version-group .label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #5a6f8c;
+            display: block;
+            margin-bottom: 8px;
+            letter-spacing: 0.3px;
+        }
+        .version-btn {
+            display: inline-block;
+            background: #eef3fc;
+            padding: 10px 20px;
+            border-radius: 40px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a2b4a;
+            text-decoration: none;
+            margin: 0 6px 8px 0;
+            transition: 0.1s;
+            border: 1px solid transparent;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .version-btn:active {
+            background: #2a7de1;
+            color: white;
+            transform: scale(0.96);
+        }
+        .version-btn .badge-ver {
+            background: #2a7de1;
+            color: white;
+            font-size: 10px;
+            border-radius: 30px;
+            padding: 2px 10px;
+            margin-left: 6px;
+            font-weight: 600;
+        }
+        .version-btn:active .badge-ver {
+            background: white;
+            color: #2a7de1;
+        }
+
+        /* Remark 영역 */
+        .remark-box {
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1.5px dashed #dce3ed;
+        }
+        .remark-box .label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #5a6f8c;
+            display: block;
+            margin-bottom: 6px;
+        }
+        .remark-box .remark-content {
+            font-size: 13px;
+            color: #3d506e;
+            background: #f8faff;
+            padding: 12px 14px;
+            border-radius: 12px;
+            word-break: break-all;
+            line-height: 1.6;
+            white-space: pre-wrap;
+        }
+        .remark-box .remark-content a {
+            color: #1a5fc7;
+            text-decoration: none;
+            border-bottom: 1px dotted #b3ceff;
+        }
+
+        /* ===== 푸터 ===== */
+        .footer-note {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 12px;
+            color: #9aabbf;
+            letter-spacing: 0.3px;
+        }
+
+        /* ===== 스크롤바 숨김 ===== */
+        .detail-panel::-webkit-scrollbar {
+            width: 4px;
+        }
+        .detail-panel::-webkit-scrollbar-thumb {
+            background: #cdd9eb;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== 헤더 ===== -->
+    <header class="app-header">
+        <h1>CNation <span>허브</span></h1>
+        <span class="badge">v1.0</span>
+    </header>
+
+    <!-- ===== 앱 리스트가 그려질 영역 ===== -->
+    <div id="appListContainer"></div>
+
+    <div class="footer-note">· 지속적으로 앱이 추가됩니다 ·</div>
+
+    <!-- ===== 상세 오버레이 ===== -->
+    <div class="detail-overlay" id="detailOverlay">
+        <div class="detail-panel" id="detailPanel">
+            <button class="close-btn" id="closeDetail">✕</button>
+            <div id="detailContent">
+                <!-- JS로 동적 렌더링 -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ================================================================
+        // 1. 앱 데이터 (추가/수정/삭제는 이 배열만 건드리면 됩니다)
+        // ================================================================
+        const appData = [{
+            id: 'drum',
+            category: '🎮 게임',
+            emoji: '🥁',
+            name: 'cnation 4x4 drum',
+            desc: '4x4 16개 패드 터치 리듬게임',
+            detailDesc: '4x4 16개 패드를 터치하며 리듬을 연주하는 게임입니다. 모바일 터치에 최적화되어 있습니다.',
+            versions: [
+                { label: '모바일', url: 'https://cnation-4x4drum.vercel.app/' },
+                { label: 'GitHub', url: 'https://civilizednation.github.io/cnation-4x4drum/' }
+            ],
+            remark: '🔗 전체 링크\nhttps://cnation-4x4drum.vercel.app/\nhttps://civilizednation.github.io/cnation-4x4drum/'
+        }, {
+            id: 'dominion',
+            category: '🎮 게임',
+            emoji: '🃏',
+            name: 'cnation 도미니언',
+            desc: '세계적 보드게임 도미니언 1:1 컴퓨터 대전',
+            detailDesc: '유명 보드게임 도미니언을 컴퓨터와 1:1로 즐길 수 있습니다. 전략적 카드 게임을 경험하세요.',
+            versions: [
+                { label: '모바일', url: 'https://cnation-dominion.vercel.app/' },
+                { label: 'GitHub', url: 'https://civilizednation.github.io/cnation-dominion/' },
+                { label: 'PC 버전', url: 'https://civilizednation.github.io/cnation-dominion/index_pc.html' }
+            ],
+            remark: '🔗 PC 전용 버전\nhttps://civilizednation.github.io/cnation-dominion/index_pc.html'
+        }, {
+            id: 'jgame',
+            category: '🎮 게임',
+            emoji: '🐍',
+            name: 'cnation 영어단어 지렁이',
+            desc: '고전 지렁이 게임 + 영어단어 맞히기',
+            detailDesc: '지렁이를 조종하며 영어 단어를 맞히는 독특한 방식의 단어 학습 게임입니다.',
+            versions: [
+                { label: '모바일', url: 'https://cnation-jgame.vercel.app/' },
+                { label: 'GitHub', url: 'https://civilizednation.github.io/cnation-jgame/' },
+                { label: 'PC 전용', url: 'https://cnation-jgame.vercel.app/index2.html' },
+                { label: '중국어 버전', url: 'https://civilizednation.github.io/cnation-jgame-c/' }
+            ],
+            remark: '🔗 중국어 버전\nhttps://civilizednation.github.io/cnation-jgame-c/'
+        }, {
+            id: 'choir',
+            category: '🎵 CCM / 교회',
+            emoji: '🎤',
+            name: '무석연합교회 성가대 연습',
+            desc: '중국 우시 무석연합교회 성가대 연습 도우미',
+            detailDesc: '성가대 곡 연습을 돕는 앱입니다. 파트별 음원과 가사를 제공합니다.',
+            versions: [
+                { label: '바로가기', url: 'https://cnation-msyh-sgd.vercel.app/' }
+            ],
+            remark: 'https://cnation-msyh-sgd.vercel.app/'
+        }, {
+            id: 'ccm',
+            category: '🎵 CCM / 교회',
+            emoji: '🎵',
+            name: 'cnation CCM list',
+            desc: '작사/작곡한 CCM 곡들을 한곳에 관리',
+            detailDesc: '@grace2melody 채널에 등록된 곡들을 별도로 관리하며, 듣기와 정보를 제공합니다.',
+            versions: [
+                { label: 'Firebase 버전', url: 'https://cnation-ccm-list.vercel.app/' },
+                { label: 'GitHub', url: 'https://civilizednation.github.io/cnation-ccm-list/' },
+                { label: 'Supabase 버전', url: 'https://civilizednation.github.io/cnation-wuxi-ccm-list/' }
+            ],
+            remark: '🔗 Supabase 서버 버전\nhttps://civilizednation.github.io/cnation-wuxi-ccm-list/'
+        }, {
+            id: 'family',
+            category: '📅 생활 / 알림',
+            emoji: '🎂',
+            name: '우리가족 일정 알림이',
+            desc: '가족 생일 등 주요 일정 D-day 관리',
+            detailDesc: '가족 구성원의 생일과 기념일을 D-day로 표시하고 알림을 줍니다.',
+            versions: [
+                { label: '바로가기', url: 'https://cnation-family-birthdays.vercel.app/' }
+            ],
+            remark: 'https://cnation-family-birthdays.vercel.app/'
+        }, {
+            id: 'team',
+            category: '📅 생활 / 알림',
+            emoji: '👥',
+            name: '우시개발팀 생일 알림이',
+            desc: 'SK하이닉스 우시개발팀 팀원 생일 D-day',
+            detailDesc: '중국 우시 SK하이닉스 개발팀 동료들의 생일을 관리하는 팀 전용 앱입니다.',
+            versions: [
+                { label: '바로가기', url: 'https://civilizednation.github.io/skhynix-wuxi-d-birthdays/' }
+            ],
+            remark: 'https://civilizednation.github.io/skhynix-wuxi-d-birthdays/'
+        }, {
+            id: 'wuxi',
+            category: '📅 생활 / 알림',
+            emoji: '🏙️',
+            name: '명국이의 중국생활 도우미',
+            desc: '우시 생활 정보 (집/교회/회사/교통/음식/쇼핑)',
+            detailDesc: '중국 우시에서의 생활에 필요한 모든 정보를 모은 생활 도우미 앱입니다.',
+            versions: [
+                { label: '바로가기', url: 'https://civilizednation.github.io/cnation-wuxi/' }
+            ],
+            remark: 'https://civilizednation.github.io/cnation-wuxi/'
+        }, {
+            id: 'goodmento',
+            category: '📅 생활 / 알림',
+            emoji: '📋',
+            name: 'goodmento 출석부',
+            desc: '인도 어린이집 출석부 (문진숙)',
+            detailDesc: '여동생 문진숙이 운영하는 인도 어린이집의 출석을 관리하는 앱입니다.',
+            versions: [
+                { label: '바로가기', url: 'https://goodmento-school-check.vercel.app/' }
+            ],
+            remark: 'https://goodmento-school-check.vercel.app/'
+        }];
+
+        // ================================================================
+        // 2. 렌더링 함수
+        // ================================================================
+
+        // 2-1. 메인 리스트
+        function renderMainList() {
+            const container = document.getElementById('appListContainer');
+            // 카테고리별 그룹핑
+            const categories = {};
+            appData.forEach(item => {
+                if (!categories[item.category]) categories[item.category] = [];
+                categories[item.category].push(item);
+            });
+
+            let html = '';
+            for (const [cat, items] of Object.entries(categories)) {
+                html += `<div class="category-block">`;
+                html += `<div class="category-title">${cat}</div>`;
+                items.forEach(app => {
+                    html += `
+                        <div class="app-card" data-id="${app.id}">
+                            <div class="emoji">${app.emoji}</div>
+                            <div class="info">
+                                <div class="name">${app.name}</div>
+                                <div class="desc">${app.desc}</div>
+                            </div>
+                            <div class="arrow">›</div>
+                        </div>
+                    `;
+                });
+                html += `</div>`;
+            }
+            container.innerHTML = html;
+
+            // 카드 클릭 이벤트
+            document.querySelectorAll('.app-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const id = this.dataset.id;
+                    const app = appData.find(a => a.id === id);
+                    if (app) openDetail(app);
+                });
+            });
+        }
+
+        // 2-2. 상세 패널 열기
+        function openDetail(app) {
+            const overlay = document.getElementById('detailOverlay');
+            const content = document.getElementById('detailContent');
+
+            // 버전 버튼 HTML
+            let versionHtml = '';
+            app.versions.forEach((v, idx) => {
+                const badge = idx === 0 ? '기본' : '';
+                versionHtml += `
+                    <a href="${v.url}" target="_blank" class="version-btn">
+                        ${v.label}
+                        ${badge ? `<span class="badge-ver">${badge}</span>` : ''}
+                    </a>
+                `;
+            });
+
+            // Remark 처리 (줄바꿈 -> <br>)
+            const remarkHtml = app.remark
+                .replace(/\n/g, '<br>')
+                .replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank">$1</a>');
+
+            content.innerHTML = `
+                <div class="detail-emoji">${app.emoji}</div>
+                <div class="detail-name">${app.name}</div>
+                <div class="detail-desc">${app.detailDesc}</div>
+
+                <div class="version-group">
+                    <span class="label">🚀 실행하기</span>
+                    ${versionHtml}
+                </div>
+
+                <div class="remark-box">
+                    <span class="label">📌 Remark & 전체 링크</span>
+                    <div class="remark-content">${remarkHtml}</div>
+                </div>
+            `;
+
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // 2-3. 상세 닫기
+        function closeDetail() {
+            document.getElementById('detailOverlay').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // ================================================================
+        // 3. 이벤트 & 실행
+        // ================================================================
+
+        document.getElementById('closeDetail').addEventListener('click', closeDetail);
+        document.getElementById('detailOverlay').addEventListener('click', function(e) {
+            if (e.target === this) closeDetail();
+        });
+
+        // 뒤로가기 대응 (안드로이드 백버튼)
+        window.addEventListener('popstate', function() {
+            if (document.getElementById('detailOverlay').classList.contains('active')) {
+                closeDetail();
+            }
+        });
+
+        // 실행!
+        renderMainList();
+
+        console.log('✅ CNation 허브 v1.0 로드 완료');
+        console.log(`📦 총 ${appData.length}개의 앱이 등록되어 있습니다.`);
+    </script>
+
+</body>
+</html>
