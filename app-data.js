@@ -82,6 +82,14 @@ const APP_DATA = [
     remark: "YouTube 채널 @grace2melody에도 곡들이 등록되어 있으며, 별도의 관리 앱으로 구성했습니다."
   },
 
+  {
+    name: "cnation 도미니언 Echo",
+    category: "MUSIC",
+    icon: "🎧",
+    desc: "cnation 도미니언 게임과 어울리는 배경음악을 들려주는 플레이어",
+    main: "https://cnation-dominion.vercel.app/echo/"
+  },
+
   // LIFE
   {
     name: "우리가족 일정 알림이",
