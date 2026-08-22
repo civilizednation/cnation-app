@@ -90,6 +90,15 @@ const APP_DATA = [
     main: "https://cnation-dominion.vercel.app/echo/"
   },
 
+  {
+    name: "cnation CCM 플레이어",
+    category: "MUSIC",
+    icon: "🎧",
+    desc: "내가 작사·작곡한 CCM 곡들을 관리 화면 없이 이어서 감상만 할 수 있는 플레이어",
+    main: "https://cnation-ccm-list.vercel.app/player/",
+    remark: "곡 등록/수정은 위의 'cnation CCM' 앱에서, 감상은 이 플레이어로 하시면 됩니다."
+  },
+
   // LIFE
   {
     name: "우리가족 일정 알림이",
