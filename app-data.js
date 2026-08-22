@@ -86,7 +86,7 @@ const APP_DATA = [
     name: "cnation 도미니언 Echo",
     category: "MUSIC",
     icon: "🎧",
-    desc: "cnation 도미니언 게임과 어울리는 배경음악을 들려주는 플레이어",
+    desc: "cnation 도미니언 게임에 사용된 배경음악을 들려주는 플레이어",
     main: "https://cnation-dominion.vercel.app/echo/"
   },
 
