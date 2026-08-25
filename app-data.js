@@ -132,11 +132,20 @@ const APP_DATA = [
     icon: "🏫",
     desc: "문진숙(여동생) 인도 어린이집 출석부",
     main: "https://goodmento-school-check.vercel.app/"
+  },
+
+  // WORK
+  {
+    name: "BG Cell Implant Simulator",
+    category: "WORK",
+    icon: "🧪",
+    desc: "DRAM BG Cell의 implant 조건을 입력하고 기준 공정 대비 dose profile, refresh/leakage 상대지수를 비교하는 TCAD 보조 시뮬레이터",
+    main: "https://cnation-tcad.vercel.app/"
   }
 ];
 
 /* 카테고리 표시 순서 */
-const CATEGORY_ORDER = ["GAME", "MUSIC", "LIFE", "TEAM", "EDUCATION"];
+const CATEGORY_ORDER = ["GAME", "MUSIC", "LIFE", "TEAM", "EDUCATION", "WORK"];
 
 /* 카테고리별 아이콘 */
 const CATEGORY_ICON = {
@@ -144,5 +153,6 @@ const CATEGORY_ICON = {
   MUSIC: "🎵",
   LIFE: "🏠",
   TEAM: "👥",
-  EDUCATION: "🏫"
+  EDUCATION: "🏫",
+  WORK: "🔬"
 };
