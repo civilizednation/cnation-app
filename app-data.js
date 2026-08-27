@@ -140,7 +140,11 @@ const APP_DATA = [
     category: "WORK",
     icon: "🧪",
     desc: "DRAM BG Cell의 implant 조건을 입력하고 기준 공정 대비 dose profile, refresh/leakage 상대지수를 비교하는 TCAD 보조 시뮬레이터",
-    main: "https://cnation-tcad.vercel.app/"
+    main: "https://cnation-tcad.vercel.app/",
+    versions: [
+      { name: "PRO 버전 (물리 엔진)", url: "https://cnation-tcad.vercel.app/pro/" }
+    ],
+    remark: "기본 버전은 튜닝된 경험식 기반이고, PRO 버전은 비선형 Poisson 방정식을 직접 수치해석해 Refresh/Leakage/GIDL을 유도합니다."
   }
 ];
 
