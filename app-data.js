@@ -40,7 +40,7 @@ const APP_DATA = [
     main: "https://cnation-dominion.vercel.app/",
     backup: "https://civilizednation.github.io/cnation-dominion/",
     versions: [
-      { name: "PC 버전", url: "https://civilizednation.github.io/cnation-dominion/index_pc.html" }
+      { name: "PC 버전", url: "https://cnation-dominion.vercel.app/pc/" }
     ],
     remark: "모바일 버전과 PC 버전을 별도로 제공합니다."
   },
