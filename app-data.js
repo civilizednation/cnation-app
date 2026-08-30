@@ -14,10 +14,14 @@
    - main      : 기본 실행 주소
 
    선택 항목
-   - backup    : 백업 주소
-   - versions  : PC / 중국어 / 다른 스타일 등 별도 실행 버전
-   - image     : 상세화면 대표 이미지 주소
-   - remark    : 기타 설명
+   - backup       : 백업 주소
+   - versions     : PC / 중국어 / 다른 스타일 등 별도 실행 버전
+   - image        : 상세화면 대표 이미지 주소
+   - remark       : 기타 설명
+   - homeShortcut : true로 설정하면 "🏠+ 바로가기" 버튼이 노출됨.
+                    해당 앱이 자체적으로 홈 화면 추가(PWA 설치) 기능을
+                    ?addHome=1 파라미터로 감지해서 자동으로 설치 안내를
+                    띄우도록 구현되어 있는 경우에만 켜주세요.
    ========================================================= */
 
 const APP_DATA = [
@@ -29,7 +33,8 @@ const APP_DATA = [
     icon: "🥁",
     desc: "4x4 16개 패드 터치 리듬게임",
     main: "https://cnation-4x4drum.vercel.app/",
-    backup: "https://civilizednation.github.io/cnation-4x4drum/"
+    backup: "https://civilizednation.github.io/cnation-4x4drum/",
+    homeShortcut: true
   },
 
   {
