@@ -33,6 +33,15 @@ const APP_DATA = [
   },
 
   {
+    name: "cnation 스플렌더(Splendor)",
+    category: "GAME",
+    icon: "💎",
+    desc: "보석을 모아 발전 카드를 구매하는 전략 보드게임",
+    main: "https://cnation-splendor.vercel.app/",
+    backup: "https://civilizednation.github.io/cnation-splendor/"
+  },
+
+  {
     name: "cnation 도미니언",
     category: "GAME",
     icon: "🃏",
