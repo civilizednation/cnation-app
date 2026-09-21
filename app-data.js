@@ -8,7 +8,7 @@
 
    필수 항목
    - name      : 앱 이름
-   - category  : 카테고리
+   - category  : 카테고리 (아래 카테고리 목록 중 하나)
    - icon      : 목록에 표시할 아이콘(이모지)
    - desc      : 간단한 설명
    - main      : 기본 실행 주소
@@ -18,6 +18,10 @@
    - versions  : PC / 중국어 / 다른 스타일 등 별도 실행 버전
    - image     : 상세화면 대표 이미지 주소
    - remark    : 기타 설명
+
+   [카테고리 목록 / 표시 순서]
+   GAME → MUSIC → UTILITY → LIFE → WORK → EDUCATION → TEAM
+   - UTILITY : 이미지 변환, 리사이징 등 자잘한 편의성 도구 앱은 여기로
    ========================================================= */
 
 const APP_DATA = [
@@ -108,6 +112,24 @@ const APP_DATA = [
     remark: "곡 등록/수정은 위의 'cnation CCM' 앱에서, 감상은 이 플레이어로 하시면 됩니다."
   },
 
+  // UTILITY
+  {
+    name: "cnation 이미지 리사이저",
+    category: "UTILITY",
+    icon: "🖼️",
+    desc: "사진 보관함/파일에서 고른 순서대로 여러 장을 한 번에 리사이징하고 JPG/WEBP/PNG로 변환",
+    main: "https://cnation-image.vercel.app/"
+  },
+
+  {
+    name: "cnation 무한 루프 OST 제작기 (Loop Video Maker)",
+    category: "UTILITY",
+    icon: "🎬",
+    desc: "여러 장의 일러스트와 배경음악을 결합해 줌·발광·파티클 모션 효과와 함께 무한 루프 OST 영상을 만드는 무설치 웹 앱",
+    main: "https://cnation-video-loop.vercel.app/",
+    remark: "PC는 풀버전 영상 한 번에 제작, 모바일(아이폰 사파리 등)은 이미지별 개별 영상으로 분할 제작 후 ZIP 일괄 다운로드에 최적화. 모든 렌더링은 브라우저 내부에서만 처리되어 이미지·음원이 서버로 전송되지 않습니다."
+  },
+
   // LIFE
   {
     name: "우리가족 일정 알림이",
@@ -125,32 +147,6 @@ const APP_DATA = [
     main: "https://civilizednation.github.io/cnation-wuxi/"
   },
 
-  {
-    name: "cnation 이미지 리사이저",
-    category: "LIFE",
-    icon: "🖼️",
-    desc: "사진 보관함/파일에서 고른 순서대로 여러 장을 한 번에 리사이징하고 JPG/WEBP/PNG로 변환",
-    main: "https://cnation-image.vercel.app/"
-  },
-
-  // TEAM
-  {
-    name: "우시개발팀 생일 알림이",
-    category: "TEAM",
-    icon: "👥",
-    desc: "중국 우시 SK하이닉스 우시개발팀 팀원들의 생일을 관리하고 D-Day 표시해주는 앱",
-    main: "https://civilizednation.github.io/skhynix-wuxi-d-birthdays/"
-  },
-
-  // EDUCATION
-  {
-    name: "goodmento 출석부",
-    category: "EDUCATION",
-    icon: "🏫",
-    desc: "문진숙(여동생) 인도 어린이집 출석부",
-    main: "https://goodmento-school-check.vercel.app/"
-  },
-
   // WORK
   {
     name: "BG Cell Implant Simulator",
@@ -164,25 +160,35 @@ const APP_DATA = [
     remark: "기본 버전은 튜닝된 경험식 기반이고, PRO 버전은 비선형 Poisson 방정식을 직접 수치해석해 Refresh/Leakage/GIDL을 유도합니다."
   },
 
+  // EDUCATION
   {
-    name: "cnation 무한 루프 OST 제작기 (Loop Video Maker)",
-    category: "WORK",
-    icon: "🎬",
-    desc: "여러 장의 일러스트와 배경음악을 결합해 줌·발광·파티클 모션 효과와 함께 무한 루프 OST 영상을 만드는 무설치 웹 앱",
-    main: "https://cnation-video-loop.vercel.app/",
-    remark: "PC는 풀버전 영상 한 번에 제작, 모바일(아이폰 사파리 등)은 이미지별 개별 영상으로 분할 제작 후 ZIP 일괄 다운로드에 최적화. 모든 렌더링은 브라우저 내부에서만 처리되어 이미지·음원이 서버로 전송되지 않습니다."
+    name: "goodmento 출석부",
+    category: "EDUCATION",
+    icon: "🏫",
+    desc: "문진숙(여동생) 인도 어린이집 출석부",
+    main: "https://goodmento-school-check.vercel.app/"
+  },
+
+  // TEAM
+  {
+    name: "우시개발팀 생일 알림이",
+    category: "TEAM",
+    icon: "👥",
+    desc: "중국 우시 SK하이닉스 우시개발팀 팀원들의 생일을 관리하고 D-Day 표시해주는 앱",
+    main: "https://civilizednation.github.io/skhynix-wuxi-d-birthdays/"
   }
 ];
 
 /* 카테고리 표시 순서 */
-const CATEGORY_ORDER = ["GAME", "MUSIC", "LIFE", "TEAM", "EDUCATION", "WORK"];
+const CATEGORY_ORDER = ["GAME", "MUSIC", "UTILITY", "LIFE", "WORK", "EDUCATION", "TEAM"];
 
 /* 카테고리별 아이콘 */
 const CATEGORY_ICON = {
   GAME: "🎮",
   MUSIC: "🎵",
+  UTILITY: "🧰",
   LIFE: "🏠",
-  TEAM: "👥",
+  WORK: "🔬",
   EDUCATION: "🏫",
-  WORK: "🔬"
+  TEAM: "👥"
 };
