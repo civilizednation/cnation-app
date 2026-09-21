@@ -20,8 +20,9 @@
    - remark    : 기타 설명
 
    [카테고리 목록 / 표시 순서]
-   GAME → MUSIC → UTILITY → LIFE → WORK → EDUCATION → TEAM
+   GAME → MUSIC → UTILITY → HOBBY → LIFE → WORK → EDUCATION → TEAM
    - UTILITY : 이미지 변환, 리사이징 등 자잘한 편의성 도구 앱은 여기로
+   - HOBBY   : 독서, 취미 감상 등 여가용 앱은 여기로
    ========================================================= */
 
 const APP_DATA = [
@@ -139,6 +140,16 @@ const APP_DATA = [
     remark: "파일명.z01, .z02 … 마지막 .zip 형식의 표준 분할 ZIP을 생성하며, 앱 내 '다시 합치기'로 복원도 가능합니다. 파일은 서버로 전송되지 않고 기기 안에서만 처리되며, 한 번에 최대 512MB·200개 분할까지 지원합니다. 아이폰은 최신 Safari 권장, 폴더 선택은 iOS 18.4 이상에서 지원됩니다."
   },
 
+  // HOBBY
+  {
+    name: "Cnation BOOK",
+    category: "HOBBY",
+    icon: "📚",
+    desc: "장편소설을 태블릿·스마트폰에서 편안하게 읽을 수 있는 개인용 웹 이북 앱",
+    main: "https://cnation-cts.vercel.app/",
+    remark: "작품·권별 목록, 이어 읽기, 책갈피, 태블릿 가로 2페이지/세로·모바일 1페이지 보기, 글꼴·글자 크기·줄간격·여백 조절, 홈 화면 추가(PWA) 및 오프라인 읽기를 지원합니다. 읽던 위치와 책갈피는 기기별 브라우저에 개별 저장됩니다. 현재 '닥터 최태수'(전 27권), '신경외과의사 박재현'(전 3권) 제공. 회원가입 없이 바로 이용 가능합니다."
+  },
+
   // LIFE
   {
     name: "우리가족 일정 알림이",
@@ -189,13 +200,14 @@ const APP_DATA = [
 ];
 
 /* 카테고리 표시 순서 */
-const CATEGORY_ORDER = ["GAME", "MUSIC", "UTILITY", "LIFE", "WORK", "EDUCATION", "TEAM"];
+const CATEGORY_ORDER = ["GAME", "MUSIC", "UTILITY", "HOBBY", "LIFE", "WORK", "EDUCATION", "TEAM"];
 
 /* 카테고리별 아이콘 */
 const CATEGORY_ICON = {
   GAME: "🎮",
   MUSIC: "🎵",
   UTILITY: "🧰",
+  HOBBY: "📚",
   LIFE: "🏠",
   WORK: "🔬",
   EDUCATION: "🏫",
