@@ -154,6 +154,15 @@ const APP_DATA = [
       { name: "PRO 버전 (물리 엔진)", url: "https://cnation-tcad.vercel.app/pro/" }
     ],
     remark: "기본 버전은 튜닝된 경험식 기반이고, PRO 버전은 비선형 Poisson 방정식을 직접 수치해석해 Refresh/Leakage/GIDL을 유도합니다."
+  },
+
+  {
+    name: "cnation 무한 루프 OST 제작기 (Loop Video Maker)",
+    category: "WORK",
+    icon: "🎬",
+    desc: "여러 장의 일러스트와 배경음악을 결합해 줌·발광·파티클 모션 효과와 함께 무한 루프 OST 영상을 만드는 무설치 웹 앱",
+    main: "https://cnation-video-loop.vercel.app/",
+    remark: "PC는 풀버전 영상 한 번에 제작, 모바일(아이폰 사파리 등)은 이미지별 개별 영상으로 분할 제작 후 ZIP 일괄 다운로드에 최적화. 모든 렌더링은 브라우저 내부에서만 처리되어 이미지·음원이 서버로 전송되지 않습니다."
   }
 ];
 
