@@ -125,6 +125,14 @@ const APP_DATA = [
     main: "https://civilizednation.github.io/cnation-wuxi/"
   },
 
+  {
+    name: "cnation 이미지 리사이저",
+    category: "LIFE",
+    icon: "🖼️",
+    desc: "사진 보관함/파일에서 고른 순서대로 여러 장을 한 번에 리사이징하고 JPG/WEBP/PNG로 변환",
+    main: "https://cnation-image.vercel.app/"
+  },
+
   // TEAM
   {
     name: "우시개발팀 생일 알림이",
