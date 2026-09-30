@@ -26,8 +26,3 @@ cp .env.example .env   # 키 입력
 npm run dev             # http://localhost:3000/ask.html
 npm run check            # 등록된 키 동작 확인
 ```
-
-## 레거시 파일
-
-`index2.html` ~ `index5.html`은 허브 구조로 개편되기 전 초기 실험 단계에서 쓰던 페이지로,
-현재 허브 어디에서도 링크되지 않는 미사용 파일입니다.
