@@ -74,13 +74,13 @@ footer{display:flex;justify-content:center;margin-top:18px;padding:3px;color:#a7
   <a class="header-home" href="./index.html" aria-label="홈으로">⌂</a>
 </header>
 <main>
-  <div id="log"><p class="empty">궁금한 것을 입력하고 Enter 를 누르세요. (Shift+Enter 줄바꿈)<br>📎 로 사진이나 PDF 를 첨부할 수 있어요.</p></div>
+  <div id="log"><p class="empty">cnation app에 어떤 앱이 있는지, 각 앱이 무슨 기능인지 물어보세요. 물론 일반적인 질문도 가능합니다.<br>입력 후 Enter 를 누르세요. (Shift+Enter 줄바꿈)<br>📎 로 사진이나 PDF 를 첨부할 수 있어요.</p></div>
   <form id="form">
     <label class="search-toggle"><input type="checkbox" id="search"> 🔍 항상 웹 검색 (오늘·날씨·뉴스 같은 질문은 자동 검색)</label>
     <div class="chips" id="chips"></div>
     <input type="file" id="file" accept="image/*,application/pdf" multiple hidden>
     <button type="button" class="attach" id="attach" title="사진 또는 PDF 첨부" aria-label="파일 첨부">📎</button>
-    <textarea id="prompt" maxlength="1000" placeholder="무엇이든 물어보세요"></textarea>
+    <textarea id="prompt" maxlength="1000" placeholder="예: 게임 카테고리에 뭐가 있어?"></textarea>
     <button id="send" class="send-btn" type="submit">전송</button>
     <div class="ai-status" id="ai-status">AI 확인 중…</div>
   </form>
