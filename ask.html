@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f2f0fc">
+<title>AI에게 물어보기 - cnation app</title>
+
+<link rel="icon" href="./favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="./icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./icons/favicon-16x16.png">
+
+<link rel="preload" href="./fonts/IBMPlexSansKR-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="./fonts/IBMPlexSansKR-Bold.woff2" as="font" type="font/woff2" crossorigin>
+
+<style>
+@font-face{font-family:'IBM Plex Sans KR';src:url('./fonts/IBMPlexSansKR-Regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'IBM Plex Sans KR';src:url('./fonts/IBMPlexSansKR-Bold.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap}
+:root{--bg-top:#eef0fb;--bg-bottom:#f8f9fd;--panel:#ffffff;--line:#edeff7;--text:#182238;--muted:#7c8598;--purple1:#8a3ffc;--purple2:#5b3df5;--user-bg:#f1eefc;--radius:20px;--shadow:0 12px 28px rgba(31,41,64,.07);--font-body:'IBM Plex Sans KR',"Malgun Gothic","맑은 고딕",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--font-head:'IBM Plex Sans KR',"Malgun Gothic","맑은 고딕",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+*{box-sizing:border-box}html{background:var(--bg-top)}
+body{margin:0;min-height:100vh;color:var(--text);background:linear-gradient(180deg,var(--bg-top) 0%,var(--bg-bottom) 55%,#f9fafc 100%);font-family:var(--font-body);font-weight:400;-webkit-font-smoothing:antialiased}
+button,input,textarea{font:inherit}button{-webkit-tap-highlight-color:transparent}
+.shell{width:min(100%,760px);min-height:100vh;margin:0 auto;padding:max(18px,env(safe-area-inset-top)) 16px max(22px,env(safe-area-inset-bottom));display:flex;flex-direction:column}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;padding:20px 22px;border-radius:26px;background:linear-gradient(120deg,var(--purple1) 0%,#7148f6 45%,var(--purple2) 100%);box-shadow:0 16px 32px rgba(90,60,240,.28)}
+.brand-small{margin:0 0 4px;color:rgba(255,255,255,.78);font-size:11px;font-weight:700;font-family:var(--font-head);letter-spacing:.13em}
+h1{margin:0;color:#fff;font-size:22px;line-height:1.15;letter-spacing:-.03em;font-weight:700;font-family:var(--font-head)}
+.header-home{flex-shrink:0;width:42px;height:42px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.35);border-radius:14px;background:rgba(255,255,255,.16);color:#fff;cursor:pointer;font-size:19px;text-decoration:none}
+
+main{flex:1;display:flex;flex-direction:column;min-height:0}
+#log{flex:1;display:flex;flex-direction:column;gap:12px;padding-bottom:4px}
+.msg{padding:12px 14px;border-radius:var(--radius);background:var(--panel);border:1px solid var(--line);box-shadow:var(--shadow);white-space:pre-wrap;word-break:break-word;font-size:14px;line-height:1.6}
+.msg.user{background:var(--user-bg);align-self:flex-end;max-width:85%;box-shadow:none}
+.msg.error{color:#dc2626}
+.msg.pending{color:var(--muted)}
+.md{white-space:normal}
+.md>:first-child{margin-top:0}.md>:last-child{margin-bottom:0}
+.md h1,.md h2,.md h3{font-size:1.05rem;margin:1em 0 .4em;font-family:var(--font-head);font-weight:700}
+.md pre{overflow-x:auto;padding:10px;border-radius:8px;background:#f4f5fb}
+.md code{font-family:ui-monospace,Menlo,monospace;font-size:.9em}
+.md blockquote{margin:.5em 0;padding-left:12px;border-left:3px solid var(--line);color:var(--muted)}
+.md table{border-collapse:collapse;display:block;overflow-x:auto}
+.md th,.md td{border:1px solid var(--line);padding:4px 8px}
+.md a{color:var(--purple2)}
+.sources{margin-top:10px;padding-top:8px;border-top:1px solid var(--line);font-size:.82rem;color:var(--muted);white-space:normal}
+.sources.error{color:#dc2626}
+.sources a{color:var(--purple2);text-decoration:none;margin-right:10px;display:inline-block}
+.empty{color:var(--muted);text-align:center;margin-top:30px;font-size:14px;line-height:1.7}
+
+form{display:flex;gap:8px;position:sticky;bottom:16px;flex-wrap:wrap;margin-top:14px}
+.search-toggle{width:100%;display:flex;align-items:center;gap:6px;font-size:.85rem;color:var(--muted)}
+.attach{padding:0 14px;min-height:48px;background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:14px;font-size:1.15rem}
+.chips{width:100%;display:flex;flex-wrap:wrap;gap:6px}
+.chips:empty{display:none}
+.chip{display:flex;align-items:center;gap:6px;padding:4px 6px 4px 4px;border-radius:8px;border:1px solid var(--line);background:var(--panel);font-size:.82rem;max-width:100%}
+.chip img{width:32px;height:32px;object-fit:cover;border-radius:4px}
+.chip span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:150px}
+.chip button{padding:0 6px;background:none;color:var(--muted);font-weight:400;border:0}
+.msg .thumbs{display:flex;flex-wrap:wrap;align-items:flex-start;gap:6px;margin-bottom:6px}
+.msg .thumbs img{max-width:120px;max-height:120px;border-radius:8px}
+.msg .thumbs .file{font-size:.82rem;padding:4px 8px;border-radius:6px;background:var(--panel)}
+.ai-status{width:100%;font-size:.72rem;color:var(--muted);text-align:center;padding-bottom:2px}
+.ai-status b{color:var(--purple2);font-weight:700}
+textarea{flex:1;resize:none;padding:12px 14px;border-radius:15px;border:1px solid var(--line);background:var(--panel);color:var(--text);font:inherit;min-height:48px;box-shadow:0 8px 20px rgba(31,41,64,.06)}
+.send-btn{min-height:48px;padding:0 20px;border:0;border-radius:15px;background:linear-gradient(135deg,var(--purple1),var(--purple2));color:#fff;font:inherit;font-weight:700;font-family:var(--font-head);cursor:pointer;box-shadow:0 10px 20px rgba(90,60,240,.22)}
+.send-btn:disabled{opacity:.5;cursor:default}
+footer{display:flex;justify-content:center;margin-top:18px;padding:3px;color:#a7aec2;font-size:11px;font-weight:700;font-family:var(--font-head)}
+@media (hover:hover){.send-btn:hover{filter:brightness(1.04)}}
+</style>
+</head>
+<body>
+<div class="shell">
+<header>
+  <div><p class="brand-small">CNATION AI</p><h1>AI에게 물어보기</h1></div>
+  <a class="header-home" href="./index.html" aria-label="홈으로">⌂</a>
+</header>
+<main>
+  <div id="log"><p class="empty">궁금한 것을 입력하고 Enter 를 누르세요. (Shift+Enter 줄바꿈)<br>📎 로 사진이나 PDF 를 첨부할 수 있어요.</p></div>
+  <form id="form">
+    <label class="search-toggle"><input type="checkbox" id="search"> 🔍 항상 웹 검색 (오늘·날씨·뉴스 같은 질문은 자동 검색)</label>
+    <div class="chips" id="chips"></div>
+    <input type="file" id="file" accept="image/*,application/pdf" multiple hidden>
+    <button type="button" class="attach" id="attach" title="사진 또는 PDF 첨부" aria-label="파일 첨부">📎</button>
+    <textarea id="prompt" maxlength="1000" placeholder="무엇이든 물어보세요"></textarea>
+    <button id="send" class="send-btn" type="submit">전송</button>
+    <div class="ai-status" id="ai-status">AI 확인 중…</div>
+  </form>
+</main>
+<footer><span>이 기능은 인터넷 연결이 필요합니다 · <a href="./index.html" style="color:#8993a8">cnation app으로</a></span></footer>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
+<script>
+const log = document.getElementById('log');
+const form = document.getElementById('form');
+const input = document.getElementById('prompt');
+const send = document.getElementById('send');
+const search = document.getElementById('search');
+const fileInput = document.getElementById('file');
+const chips = document.getElementById('chips');
+const aiStatus = document.getElementById('ai-status');
+
+// 🔍 체크 상태를 이 브라우저에 기억 (저장이 막혀 있어도 앱은 정상 동작)
+try {
+  search.checked = localStorage.getItem('webSearch') === 'on';
+} catch {}
+search.addEventListener('change', () => {
+  try {
+    localStorage.setItem('webSearch', search.checked ? 'on' : 'off');
+  } catch {}
+});
+
+// ---- 하단 AI 표시: 사용 가능한 AI 순서 + 마지막으로 답한 AI 강조 ----
+let providers = [];
+function renderStatus(lastUsed) {
+  if (!providers.length) {
+    aiStatus.textContent = '사용 가능한 AI 가 없습니다';
+    return;
+  }
+  aiStatus.textContent = 'AI: ';
+  providers.forEach((provider, i) => {
+    if (i) aiStatus.append(' → ');
+    const used = lastUsed && lastUsed.provider === provider.label;
+    const name = used ? `${provider.label} (${lastUsed.model})` : provider.label;
+    if (used) {
+      const b = document.createElement('b');
+      b.textContent = `● ${name}`;
+      aiStatus.appendChild(b);
+    } else {
+      aiStatus.append(name);
+    }
+  });
+}
+fetch('/api/status')
+  .then((res) => res.json())
+  .then((data) => { providers = data.providers || []; renderStatus(); })
+  .catch(() => { aiStatus.textContent = ''; });
+
+// ---- 첨부파일 ----
+const MAX_FILES = 3;
+const MAX_TOTAL_BYTES = 3 * 1024 * 1024; // base64 로 바뀌면 약 4MB (Vercel 요청 한도 4.5MB)
+const MAX_IMAGE_SIDE = 1600;
+let attachments = []; // { name, mimeType, data(base64), preview(dataURL|null), size }
+
+const readAsDataURL = (blob) => new Promise((resolve, reject) => {
+  const reader = new FileReader();
+  reader.onload = () => resolve(reader.result);
+  reader.onerror = () => reject(reader.error);
+  reader.readAsDataURL(blob);
+});
+
+// 휴대폰 사진은 몇 MB 씩 되므로 긴 변 1600px JPEG 로 줄여서 보냅니다.
+async function shrinkImage(file) {
+  const url = URL.createObjectURL(file);
+  try {
+    const img = await new Promise((resolve, reject) => {
+      const el = new Image();
+      el.onload = () => resolve(el);
+      el.onerror = () => reject(new Error('이미지를 읽을 수 없습니다.'));
+      el.src = url;
+    });
+    const scale = Math.min(1, MAX_IMAGE_SIDE / Math.max(img.naturalWidth, img.naturalHeight));
+    const canvas = document.createElement('canvas');
+    canvas.width = Math.round(img.naturalWidth * scale);
+    canvas.height = Math.round(img.naturalHeight * scale);
+    canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+    return canvas.toDataURL('image/jpeg', 0.85);
+  } finally {
+    URL.revokeObjectURL(url);
+  }
+}
+
+function renderChips() {
+  chips.textContent = '';
+  attachments.forEach((file, i) => {
+    const chip = document.createElement('div');
+    chip.className = 'chip';
+    if (file.preview) {
+      const img = document.createElement('img');
+      img.src = file.preview;
+      img.alt = '';
+      chip.appendChild(img);
+    }
+    const name = document.createElement('span');
+    name.textContent = file.preview ? file.name : `📄 ${file.name}`;
+    const remove = document.createElement('button');
+    remove.type = 'button';
+    remove.textContent = '✕';
+    remove.setAttribute('aria-label', `${file.name} 삭제`);
+    remove.onclick = () => { attachments.splice(i, 1); renderChips(); };
+    chip.append(name, remove);
+    chips.appendChild(chip);
+  });
+}
+
+document.getElementById('attach').onclick = () => fileInput.click();
+
+fileInput.addEventListener('change', async () => {
+  for (const file of fileInput.files) {
+    if (attachments.length >= MAX_FILES) {
+      alert(`파일은 ${MAX_FILES}개까지 첨부할 수 있습니다.`);
+      break;
+    }
+    try {
+      let dataURL;
+      if (file.type === 'application/pdf') {
+        dataURL = await readAsDataURL(file);
+      } else if (file.type.startsWith('image/') || /\.(heic|heif)$/i.test(file.name)) {
+        dataURL = await shrinkImage(file);
+      } else {
+        alert(`${file.name}: 이미지와 PDF 만 첨부할 수 있습니다.`);
+        continue;
+      }
+      const [header, data] = dataURL.split(',');
+      const mimeType = header.slice(5, header.indexOf(';'));
+      const size = Math.ceil(data.length * 0.75);
+      const total = attachments.reduce((sum, f) => sum + f.size, 0) + size;
+      if (total > MAX_TOTAL_BYTES) {
+        alert(`${file.name}: 첨부파일 합계가 3MB 를 넘습니다.`);
+        continue;
+      }
+      attachments.push({
+        name: file.name,
+        mimeType,
+        data,
+        size,
+        preview: mimeType.startsWith('image/') ? dataURL : null,
+      });
+    } catch (error) {
+      alert(`${file.name}: ${error.message}`);
+    }
+  }
+  fileInput.value = '';
+  renderChips();
+});
+
+// 마크다운 규칙상 "**서울(Seoul)**은" 처럼 닫는 ** 앞이 문장부호이고 뒤가 한글이면 굵게가 안 됩니다.
+// 코드 블록(```)이 아닌 부분의 한 줄짜리 **…** 는 직접 <strong> 으로 바꿔 줍니다.
+function fixCjkBold(text) {
+  return text
+    .split(/(```[\s\S]*?(?:```|$))/)
+    .map((part, i) => (i % 2 ? part : part.replace(/\*\*([^*\n]+?)\*\*/g, '<strong>$1</strong>')))
+    .join('');
+}
+
+// 마크다운을 HTML 로 바꿔서 표시 (라이브러리를 못 불러오면 일반 텍스트로)
+function renderMarkdown(el, text) {
+  if (window.marked && window.DOMPurify) {
+    el.innerHTML = DOMPurify.sanitize(marked.parse(fixCjkBold(text)));
+    el.querySelectorAll('a').forEach((a) => { a.target = '_blank'; a.rel = 'noopener noreferrer'; });
+    el.classList.add('md');
+  } else {
+    el.textContent = text;
+  }
+}
+
+function addMessage(text, kind) {
+  log.querySelector('.empty')?.remove();
+  const el = document.createElement('div');
+  el.className = `msg ${kind}`;
+  el.textContent = text;
+  log.appendChild(el);
+  el.scrollIntoView({ behavior: 'smooth', block: 'end' });
+  return el;
+}
+
+// 서버가 보내는 NDJSON(한 줄에 JSON 하나) 스트림을 이벤트 단위로 읽습니다.
+async function* readEvents(res) {
+  const reader = res.body.getReader();
+  const decoder = new TextDecoder();
+  let buffer = '';
+  while (true) {
+    const { value, done } = await reader.read();
+    if (done) break;
+    buffer += decoder.decode(value, { stream: true });
+    let newline;
+    while ((newline = buffer.indexOf('\n')) >= 0) {
+      const line = buffer.slice(0, newline).trim();
+      buffer = buffer.slice(newline + 1);
+      if (line) yield JSON.parse(line);
+    }
+  }
+  if (buffer.trim()) yield JSON.parse(buffer);
+}
+
+function nearBottom() {
+  return window.innerHeight + window.scrollY >= document.body.scrollHeight - 120;
+}
+
+function addFooter(answer, text) {
+  const footer = document.createElement('div');
+  footer.className = 'sources';
+  footer.textContent = text;
+  answer.appendChild(footer);
+  return footer;
+}
+
+function addSources(answer, sources) {
+  const box = addFooter(answer, '출처: ');
+  sources.forEach((source, i) => {
+    const link = document.createElement('a');
+    link.href = source.url;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    link.textContent = `[${i + 1}] ${source.title}`;
+    box.appendChild(link);
+  });
+}
+
+form.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  const prompt = input.value.trim();
+  const files = attachments;
+  if (!prompt && !files.length) return;
+
+  const userMsg = addMessage(prompt, 'user');
+  if (files.length) {
+    const thumbs = document.createElement('div');
+    thumbs.className = 'thumbs';
+    for (const file of files) {
+      if (file.preview) {
+        const img = document.createElement('img');
+        img.src = file.preview;
+        img.alt = file.name;
+        thumbs.appendChild(img);
+      } else {
+        const tag = document.createElement('div');
+        tag.className = 'file';
+        tag.textContent = `📄 ${file.name}`;
+        thumbs.appendChild(tag);
+      }
+    }
+    userMsg.prepend(thumbs);
+  }
+  input.value = '';
+  attachments = [];
+  renderChips();
+  send.disabled = true;
+  const answer = addMessage('생각 중…', 'pending');
+  const body = document.createElement('div');
+  let reply = '';
+  let meta = null;
+  const sources = [];
+  const notices = [];
+  let scheduled = false;
+
+  // 글자가 들어올 때마다 다시 그리되, 화면 갱신 주기(약 60fps)에 맞춰 한 번씩만
+  const render = () => {
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(() => {
+      scheduled = false;
+      const stick = nearBottom();
+      renderMarkdown(body, reply);
+      if (stick) window.scrollTo(0, document.body.scrollHeight);
+    });
+  };
+
+  try {
+    const res = await fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        prompt,
+        search: search.checked,
+        files: files.map(({ name, mimeType, data }) => ({ name, mimeType, data })),
+      }),
+    });
+    if (!res.ok || !res.headers.get('Content-Type')?.includes('ndjson')) {
+      const data = await res.json().catch(() => ({}));
+      throw new Error(data.error || `요청 실패 (HTTP ${res.status})`);
+    }
+
+    for await (const event of readEvents(res)) {
+      if (event.type === 'meta') {
+        meta = event;
+        renderStatus(meta);
+      } else if (event.type === 'delta') {
+        if (!reply) {
+          answer.textContent = '';
+          answer.className = 'msg';
+          answer.appendChild(body);
+        }
+        reply += event.text;
+        render();
+      } else if (event.type === 'sources') {
+        sources.push(...event.sources);
+      } else if (event.type === 'notice') {
+        notices.push(event.text);
+      } else if (event.type === 'error') {
+        throw new Error(event.error);
+      }
+    }
+
+    renderMarkdown(body, reply);
+    if (meta) {
+      const searchLabel = meta.search ? (meta.autoSearch ? ' · 🔍 자동 검색' : ' · 🔍 검색 사용') : '';
+      addFooter(answer, `${meta.provider} · ${meta.model}${searchLabel}`);
+    }
+    if (sources.length) addSources(answer, sources);
+    notices.forEach((text) => addFooter(answer, `ℹ️ ${text}`));
+  } catch (error) {
+    if (reply) {
+      // 답변 도중에 끊긴 경우: 받은 부분은 남기고 오류를 덧붙입니다.
+      renderMarkdown(body, reply);
+      addFooter(answer, `⚠️ ${error.message}`).classList.add('error');
+    } else {
+      answer.textContent = `오류: ${error.message}`;
+      answer.className = 'msg error';
+    }
+  } finally {
+    send.disabled = false;
+    input.focus();
+  }
+});
+
+input.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter' && !event.shiftKey && !event.isComposing) {
+    event.preventDefault();
+    form.requestSubmit();
+  }
+});
+</script>
+</body>
+</html>
