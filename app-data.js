@@ -135,6 +135,16 @@ const APP_DATA = [
 
   // UTILITY
   {
+    name: "cnation Recipes",
+    category: "UTILITY",
+    icon: "📚",
+    desc: "여러 cnation 앱/게임에서 재사용하는 개발 자료(폰트, API 키 가이드 등)를 모아두고 다운로드·클립보드 복사하는 자료실",
+    main: "https://cnation-rcp.vercel.app/",
+    backup: "https://civilizednation.github.io/cnation-rcp/",
+    detail: "cnation 앱/게임을 만들 때 반복해서 쓰는 자료(폰트, API 키 설정 가이드, 디자인 토큰 등)를 카테고리별로 모아두고, 필요할 때 훑어보며 새 프로젝트에 바로 가져다 쓸 수 있게 만든 개발자용 자료실입니다.\n• 카테고리별(폰트, API, CSS, 템플릿 등)로 레시피를 정리해서 탐색\n• 텍스트 파일(.md 등)은 내용 미리보기와 클립보드 복사 지원\n• 폰트 파일 등 바이너리 자료는 바로 다운로드\n• 새 앱 작업을 시작할 때 필요한 레시피를 첨부하거나 복사해서 붙여넣는 용도\n앱을 직접 사용하는 용도라기보다는, 새 프로젝트를 시작할 때마다 반복되는 설정을 빠르게 재사용하기 위한 개인 개발 도구입니다."
+  },
+
+  {
     name: "cnation 이미지 리사이저",
     category: "UTILITY",
     icon: "🖼️",
