@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#f2f0fc">
 <title>Revision History - Cnation App</title>
-<link rel="preload" href="./fonts/GowunDodum-Regular.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="./fonts/Sunflower-Bold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="./fonts/IBMPlexSansKR-ExtraLight.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="./fonts/IBMPlexSansKR-Bold.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-@font-face{font-family:'Gowun Dodum';src:url('./fonts/GowunDodum-Regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
-@font-face{font-family:'Sunflower';src:url('./fonts/Sunflower-Bold.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap}
-:root{--bg-top:#eef0fb;--bg-bottom:#f8f9fd;--panel:#ffffff;--line:#edeff7;--text:#182238;--muted:#7c8598;--purple1:#8a3ffc;--purple2:#5b3df5;--radius:20px;--shadow:0 12px 28px rgba(31,41,64,.07);--font-body:'Gowun Dodum',"Malgun Gothic","맑은 고딕",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--font-head:'Sunflower',"Malgun Gothic","맑은 고딕",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-*{box-sizing:border-box}html{background:var(--bg-top)}body{margin:0;min-height:100vh;color:var(--text);background:linear-gradient(180deg,var(--bg-top) 0%,var(--bg-bottom) 55%,#f9fafc 100%);font-family:var(--font-body);-webkit-font-smoothing:antialiased}
+@font-face{font-family:'IBM Plex Sans KR';src:url('./fonts/IBMPlexSansKR-ExtraLight.woff2') format('woff2');font-weight:200;font-style:normal;font-display:swap}
+@font-face{font-family:'IBM Plex Sans KR';src:url('./fonts/IBMPlexSansKR-Bold.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap}
+:root{--bg-top:#eef0fb;--bg-bottom:#f8f9fd;--panel:#ffffff;--line:#edeff7;--text:#182238;--muted:#7c8598;--purple1:#8a3ffc;--purple2:#5b3df5;--radius:20px;--shadow:0 12px 28px rgba(31,41,64,.07);--font-body:'IBM Plex Sans KR',"Malgun Gothic","맑은 고딕",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--font-head:'IBM Plex Sans KR',"Malgun Gothic","맑은 고딕",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+*{box-sizing:border-box}html{background:var(--bg-top)}body{margin:0;min-height:100vh;color:var(--text);background:linear-gradient(180deg,var(--bg-top) 0%,var(--bg-bottom) 55%,#f9fafc 100%);font-family:var(--font-body);font-weight:200;-webkit-font-smoothing:antialiased}
 .shell{width:min(100%,820px);min-height:100vh;margin:0 auto;padding:max(18px,env(safe-area-inset-top)) 16px max(22px,env(safe-area-inset-bottom))}
 header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;padding:20px 22px;border-radius:26px;background:linear-gradient(120deg,var(--purple1) 0%,#7148f6 45%,var(--purple2) 100%);box-shadow:0 16px 32px rgba(90,60,240,.28)}
 .brand-small{margin:0 0 4px;color:rgba(255,255,255,.78);font-size:11px;font-weight:700;font-family:var(--font-head);letter-spacing:.13em}
@@ -22,7 +22,7 @@ h1{margin:0;color:#fff;font-size:24px;line-height:1.15;letter-spacing:-.03em;fon
 .entry{border:1px solid var(--line);border-radius:var(--radius);background:var(--panel);box-shadow:var(--shadow);padding:16px 18px}
 .entry-head{display:flex;align-items:baseline;gap:10px;margin-bottom:8px;flex-wrap:wrap}
 .ver{font-size:15px;font-weight:700;font-family:var(--font-head);color:var(--purple2)}
-.date{font-size:12px;color:var(--muted);font-weight:400}
+.date{font-size:12px;color:var(--muted);font-weight:200}
 .entry ul{margin:0;padding-left:20px;color:var(--text);font-size:13.5px;line-height:1.7}
 .entry li{margin-bottom:2px}
 footer{display:flex;justify-content:space-between;gap:10px;margin-top:26px;padding:15px 3px 3px;color:#a7aec2;font-size:11px;font-weight:700;font-family:var(--font-head)}
@@ -32,8 +32,13 @@ footer{display:flex;justify-content:space-between;gap:10px;margin-top:26px;paddi
 <div class="shell">
 <header><div><p class="brand-small">MY APPLICATION COLLECTION</p><h1>Revision History</h1></div></header>
 <a class="back-btn" href="./index.html">← 목록으로</a>
-<div class="current-badge"><span>📌</span><span>현재 버전: Version 1.15.0</span></div>
+<div class="current-badge"><span>📌</span><span>현재 버전: Version 1.16.0</span></div>
 <div class="timeline">
+
+<div class="entry"><div class="entry-head"><span class="ver">v1.16.0</span><span class="date">2026-09-30</span></div><ul>
+<li>전용 폰트를 Gowun Dodum + Sunflower 조합에서 IBM Plex Sans KR 단일 패밀리(굵기 200 / 700)로 교체 — 두 폰트의 스타일이 어울리지 않는다는 피드백 반영, 같은 폰트 계열이라 본문과 강조가 훨씬 조화롭게 보임</li>
+<li>기존 Gowun Dodum·Sunflower 폰트 파일 삭제, IBM Plex Sans KR 한글 전체 음절 서브셋(ExtraLight 517KB, Bold 497KB)으로 교체 저장</li>
+</ul></div>
 
 <div class="entry"><div class="entry-head"><span class="ver">v1.15.0</span><span class="date">2026-09-30</span></div><ul>
 <li>전용 폰트 2종 도입 — 본문은 Gowun Dodum, 제목·강조·버튼 등 굵은 글씨는 Sunflower(굵기 700)</li>
@@ -143,7 +148,7 @@ footer{display:flex;justify-content:space-between;gap:10px;margin-top:26px;paddi
 </ul></div>
 
 </div>
-<footer><span>CNATION</span><span>Version 1.15.0</span></footer>
+<footer><span>CNATION</span><span>Version 1.16.0</span></footer>
 </div>
 </body>
 </html>
