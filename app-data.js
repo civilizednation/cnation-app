@@ -212,9 +212,15 @@ const APP_DATA = [
     desc: "우시 청학골, 경복궁, 홍보각, 한궈 고기집, 란조라면, 지스김밥 맛집 메뉴판 앱",
     main: "https://civilizednation.github.io/wuxi-menu/",
     versions: [
-      { name: "Vercel 실행", url: "https://wuxi-menu.vercel.app/" }
+      { name: "Vercel 실행", url: "https://wuxi-menu.vercel.app/" },
+      { name: "🍽 청학골 전용", url: "https://civilizednation.github.io/wuxi-menu/chg/" },
+      { name: "🍽 홍보각 전용", url: "https://civilizednation.github.io/wuxi-menu/hbg/" },
+      { name: "🍽 경복궁 전용", url: "https://civilizednation.github.io/wuxi-menu/gbg/" },
+      { name: "🍽 한궈 고기집 전용", url: "https://civilizednation.github.io/wuxi-menu/hg/" },
+      { name: "🍽 란조라면 전용", url: "https://civilizednation.github.io/wuxi-menu/lj/" },
+      { name: "🍽 지스김밥 전용", url: "https://civilizednation.github.io/wuxi-menu/jis/" }
     ],
-    remark: "기본 실행(GitHub Pages)은 중국에서 VPN 없이 접속됩니다. Vercel 실행은 VPN 환경이나 해외에서 사용하세요. 홈 화면에 추가(PWA)하면 '우시맛집메뉴판' 아이콘으로 바로 실행할 수 있습니다.",
+    remark: "기본 실행(GitHub Pages)은 중국에서 VPN 없이 접속됩니다. Vercel 실행은 VPN 환경이나 해외에서 사용하세요. '○○ 전용' 버튼은 해당 음식점 메뉴만 바로 열리는 주소이며(VPN 없이 접속), 각각 홈 화면에 추가하면 음식점 이름의 앱으로 설치됩니다. Vercel 전용 주소는 wuxi-menu.vercel.app/chg/ 처럼 뒤에 음식점 코드(chg·hbg·gbg·hg·lj·jis)를 붙이면 됩니다.",
     detail: "중국 우시(无锡)에서 자주 찾는 한식·중식·분식 맛집 여섯 곳의 메뉴를 한 앱에 모아둔 메뉴판 겸 주문 계산기입니다.\n• 청학골(한식·숯불구이), 경복궁(한식·쌈밥), 홍보각(중화요리), 한궈 고기집(흑돼지·소고기 구이), 란조라면(란저우 소고기면), 지스김밥(김밥·밥버거·분식) 중 음식점을 골라 전체 메뉴를 분류별로 확인\n• 청학골, 경복궁, 한궈 고기집은 매장 메뉴판의 음식 사진을 보면서 고를 수 있고, 사진을 누르면 크게 확인 가능\n• 메뉴 이름을 한국어와 중국어로 함께 표시해, 현지 직원에게 화면을 보여주며 주문하기 편리\n• 먹고 싶은 메뉴를 담으면 수량에 맞춰 총액을 자동 계산\n• 메뉴 검색과 다크 모드 지원, 담은 메뉴는 기기에 저장되어 다시 열어도 유지\n• 홈 화면에 추가하면 앱처럼 실행되고, 한 번 열어본 뒤에는 인터넷이 끊겨도 메뉴판 확인 가능\n주문 전에 메뉴와 가격을 미리 보고 인원수에 맞춰 예산을 가늠해볼 수 있는, 우시 생활자와 방문자를 위한 실용 앱입니다."
   },
 
