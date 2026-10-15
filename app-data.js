@@ -135,6 +135,16 @@ const APP_DATA = [
 
   // UTILITY
   {
+    name: "cnation File",
+    category: "UTILITY",
+    icon: "📋",
+    desc: "클립보드 내용을 원하는 파일명으로 기기에 저장하거나 GitHub 레포에 바로 커밋하는 무설치 웹앱",
+    main: "https://civilizednation.github.io/cnation-file/",
+    remark: "⚠️ Safari에서 열고 '공유 → 홈 화면에 추가'로 설치한 뒤 홈 화면 아이콘으로 실행하세요. Safari는 7일 이상 열지 않은 사이트의 저장 데이터를 지우는데, 홈 화면 앱은 이 정리 대상이 아니라서 GitHub 토큰이 유지됩니다. 홈 화면 앱과 Safari는 저장 공간이 따로라 토큰은 홈 화면 앱 안에서 입력해야 합니다. 토큰은 서버로 보내지 않고 이 기기에만 저장되며, 링크를 아는 다른 사람은 토큰이 없어 커밋할 수 없습니다. 클립보드·공유 기능은 HTTPS(배포 주소)에서만 동작합니다.",
+    detail: "폰에서 복사한 코드나 글을 원하는 파일명의 파일로 바로 만들어 주는 도구입니다. 기기에 파일로 저장하거나, GitHub 레포에 바로 커밋해서 '폰에서 복사 → 커밋 → 사이트 반영'까지 한 번에 끝낼 수 있습니다.\n• 클립보드 붙여넣기 버튼 한 번으로 내용 입력 (iPhone은 '붙여넣기' 확인 후 입력)\n• 파일명 지정 — 마지막에 쓴 파일명을 기억, html·css·js·json·md 등 확장자에 맞는 형식으로 저장\n• 💾 기기에 저장 — iPhone은 공유 시트에서 '파일에 저장', PC는 바로 다운로드\n• ⬆️ GitHub 커밋 — 레포·브랜치·폴더를 그때그때 골라 업로드와 커밋을 한 번에, 커밋 메시지는 비우면 자동 생성\n• 같은 파일이 이미 있으면 덮어쓸지 먼저 확인하고, 완료 후 '커밋 보기' 링크 표시\n• 고른 레포·브랜치·폴더는 다음 실행 때도 기억\n• 토큰이 지워져도 iCloud 키체인 자동완성으로 바로 다시 입력 가능\n[처음 설정] GitHub → Settings → Developer settings → Fine-grained tokens에서 토큰 생성 (Repository access: All repositories, Permissions: Contents — Read and write, 만료일 지정) → 홈 화면 앱의 ⚙️ GitHub 설정에 붙여넣고 '토큰 저장 · 레포 불러오기'."
+  },
+
+  {
     name: "cnation Recipes",
     category: "UTILITY",
     icon: "📚",
