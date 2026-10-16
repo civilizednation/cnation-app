@@ -16,6 +16,8 @@
    선택 항목
    - backup    : 백업 주소
    - versions  : PC / 중국어 / 다른 스타일 등 별도 실행 버전
+                 목록 카드에는 첫 번째 버전만 버튼으로 표시됩니다.
+                 pin: true 를 붙인 버전은 목록에도 추가로 표시됩니다 (최대 2개).
    - image     : 상세화면 대표 이미지 주소
    - remark    : 기타 설명
    - detail    : 상세 페이지 하단에 노출되는 긴 소개글.
@@ -78,7 +80,7 @@ const APP_DATA = [
     backup: "https://civilizednation.github.io/cnation-dominion/",
     versions: [
       { name: "PC 버전", url: "https://cnation-dominion.vercel.app/pc/" },
-      { name: "🎵 게임 OST 듣기 (YouTube)", url: "https://youtu.be/M_M-qVerE4Q?si=XcyrgLPHeA-b9SaX" }
+      { name: "🎵 게임 OST 듣기 (YouTube)", url: "https://youtu.be/M_M-qVerE4Q?si=XcyrgLPHeA-b9SaX", pin: true }
     ],
     remark: "모바일 버전과 PC 버전을 별도로 제공합니다.",
     detail: "세계적으로 유명한 덱빌딩(deck-building) 보드게임 '도미니언'을 컴퓨터와 1:1로 대결하는 방식으로 즐길 수 있습니다.\n• 기본 시작 덱(영지·구리 등)에서 출발해, 왕국 카드 더미에서 액션·재화·승점 카드를 구매하며 자신만의 덱을 강화\n• 액션(Action)·구매(Buy)·재화(Treasure) 단계로 진행되는 턴제 구조\n• 매 게임마다 왕국 카드 조합이 달라져 전략도 함께 바뀌는 높은 재플레이성\n• 게임 종료 시 승점 카드를 가장 많이 모은 쪽이 승리\n모바일 터치에 최적화된 기본 버전과, 마우스·키보드 조작에 최적화된 PC 전용 버전을 별도로 제공합니다.\n게임 OST 듣기 (YouTube): https://youtu.be/M_M-qVerE4Q?si=XcyrgLPHeA-b9SaX"
