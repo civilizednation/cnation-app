@@ -32,8 +32,12 @@ footer{display:flex;justify-content:space-between;gap:10px;margin-top:26px;paddi
 <div class="shell">
 <header><div><p class="brand-small">MY APPLICATION COLLECTION</p><h1>Revision History</h1></div></header>
 <a class="back-btn" href="./index.html">← 목록으로</a>
-<div class="current-badge"><span>📌</span><span>현재 버전: Version 1.26.0</span></div>
+<div class="current-badge"><span>📌</span><span>현재 버전: Version 1.27.0</span></div>
 <div class="timeline">
+
+<div class="entry"><div class="entry-head"><span class="ver">v1.27.0</span><span class="date">2026-10-30</span></div><ul>
+<li>AI에게 물어보기가 질문을 멈춘 채 "생각 중..."에서 끝없이 멈추는 문제 수정 — Tavily 검색·Gemini·GitHub Models·Groq 호출에 타임아웃(각 8~10초)이 전혀 없어서, 응답이 느리거나 멈추면 Vercel 함수 제한(30초)까지 그대로 멈춰 있던 것이 원인. 이제 타임아웃이 지나면 바로 실패 처리하고 다음 단계로 넘어가거나 오류 메시지를 보여줌</li>
+</ul></div>
 
 <div class="entry"><div class="entry-head"><span class="ver">v1.26.0</span><span class="date">2026-10-16</span></div><ul>
 <li>목록 카드에 추가 버튼을 고정 표시하는 기능 추가 — 버전 항목에 <code>pin: true</code>를 붙이면 첫 번째 버전 버튼과 함께 목록에도 표시 (최대 2개, 3버튼일 때 「실행하기」는 윗줄 전체, 나머지 두 버튼은 아랫줄에 나란히)</li>
@@ -219,7 +223,7 @@ footer{display:flex;justify-content:space-between;gap:10px;margin-top:26px;paddi
 </ul></div>
 
 </div>
-<footer><span>CNATION</span><span>Version 1.26.0</span></footer>
+<footer><span>CNATION</span><span>Version 1.27.0</span></footer>
 </div>
 </body>
 </html>
