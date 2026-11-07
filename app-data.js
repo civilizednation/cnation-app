@@ -257,7 +257,7 @@ const APP_DATA = [
   },
 
   {
-    name: "Cnation BOOK",
+    name: "cnation Book Reader",
     category: "HOBBY",
     icon: "📚",
     desc: "장편소설을 태블릿·스마트폰에서 편안하게 읽을 수 있는 개인용 웹 이북 앱",
